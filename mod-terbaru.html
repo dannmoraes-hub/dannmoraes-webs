@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DANNMORAES // MOD TERBARU</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
+:root{
+ --bg:#07111f;--panel:#0d1d35;--panel2:#102544;--line:#24456f;
+ --text:#e8f1ff;--muted:#91a9c9;--blue:#4aa8ff;--blue2:#79c4ff;
+ --good:#52d6a0;--red:#fb7185;--gold:#fbbf24;
+ .success-box { display: none; margin-top: 15px; background: rgba(3, 7, 18, 0.95); border: 1px solid #ef4444; padding: 20px; border-radius: 6px; text-align: center; box-shadow: 0 0 15px rgba(239, 68, 68, 0.1); }
+  .warning-text { font-size: 0.85rem; color: #ef4444; font-weight: bold; font-style: basic; margin-bottom: 15px; }
+}
+html{background:var(--bg);scroll-behavior:auto}
+body{min-height:100vh;color:var(--text);background:
+ radial-gradient(circle at 50% -10%,rgba(74,168,255,.16),transparent 38%),
+ radial-gradient(circle at 90% 80%,rgba(101,124,255,.10),transparent 30%),
+ linear-gradient(135deg,#040a14,#07111f 50%,#030812);
+ padding:16px;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:
+ linear-gradient(rgba(121,196,255,.035) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(121,196,255,.035) 1px,transparent 1px);background-size:32px 32px}
+a{color:inherit}
+button,a,input{font:inherit}
+.main-wrapper{width:min(1120px,100%);margin:auto;padding:8px 0 36px}
+header,.content-box,footer{
+ background:var(--panel);border:1px solid var(--line);
+ box-shadow:0 8px 24px rgba(0,0,0,.20);border-radius:18px
+}
+header{text-align:center;padding:25px 20px;margin-bottom:14px}
+.club-badge{font-size:.75rem;color:var(--blue2);letter-spacing:2.5px;font-weight:800;margin-bottom:8px}
+.main-title{font-size:clamp(1.55rem,5vw,2rem);font-weight:900;letter-spacing:.04em;text-shadow:0 0 20px rgba(74,168,255,.18)}
+.verified-badge{display:inline-grid;place-items:center;width:24px;height:24px;margin-left:7px;border:1px solid rgba(82,214,160,.45);border-radius:50%;color:var(--good);font-size:.75rem;vertical-align:middle}
+.web-subtitle{margin-top:9px;color:var(--muted);font-size:.85rem;line-height:1.5}
+.top-info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px}
+.content-box{padding:20px;position:relative;overflow:hidden}
+.content-box:before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.55}
+.zoomable-card{transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;cursor:pointer}
+.zoomable-card:hover{transform:translateY(-2px);border-color:#386a9d}
+.zoomable-card.zoomed{border-color:rgba(121,196,255,.7);box-shadow:0 14px 38px rgba(0,0,0,.34)}
+.side-title{font-size:.92rem;color:var(--blue2);font-weight:900;text-transform:uppercase;border-left:3px solid var(--blue);padding-left:9px;margin-bottom:9px}
+.side-desc{font-size:.84rem;line-height:1.65;color:#b9c9dc}
+.split-layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:14px}
+.warning-title{font-size:.85rem;color:var(--gold);line-height:1.55;border-left:3px solid var(--gold);padding-left:10px;margin-bottom:18px}
+.mod-header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:8px}
+.mod-name{font-size:1.35rem;font-weight:900}
+.mod-version{font-size:.72rem;background:#173a63;color:#aee0ff;border:1px solid #2e6aa4;padding:4px 9px;border-radius:7px;font-weight:900;white-space:nowrap}
+.mod-meta{font-size:.78rem;color:var(--muted);display:flex;gap:13px;margin-top:6px;flex-wrap:wrap}
+.primary-btn,.side-nav-btn,.btn-verify,.bm-modal-btn{
+ display:block;width:100%;border:1px solid rgba(121,196,255,.25);
+ background:linear-gradient(135deg,#122f4e,#09182b);color:#e8faff;
+ border-radius:11px;padding:12px 14px;font-weight:900;text-align:center;cursor:pointer;
+ text-decoration:none;transition:.18s ease
+}
+.primary-btn:hover,.side-nav-btn:hover,.btn-verify:hover,.bm-modal-btn:hover{transform:translateY(-1px);border-color:rgba(121,196,255,.65);background:#143759}
+.primary-btn:active,.side-nav-btn:active,.btn-verify:active,.bm-modal-btn:active{transform:scale(.985)}
+.challenge-box{display:none;margin-top:14px;background:#09172b;border:1px solid #315989;padding:16px;border-radius:14px;text-align:center}
+.hint-text{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.challenge-input{width:100%;padding:11px;border-radius:10px;background:#050d19;border:1px solid #2a4d7b;color:#fff;text-align:center;letter-spacing:2px;outline:none;margin-bottom:10px}
+.challenge-input:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(74,168,255,.1)}
+.challenge-input.auto-filled{border-color:var(--good)!important;box-shadow:0 0 0 3px rgba(82,214,160,.1)!important}
+.btn-verify{width:auto;display:inline-block;padding:10px 18px}
+.error-msg{display:none;color:var(--red);font-size:.78rem;font-weight:800;margin-top:10px;line-height:1.5}
+.extra-hint{display:none;color:var(--good);font-size:.78rem;font-weight:800;margin-top:10px;line-height:1.5}
+.success-box{display:none;margin-top:14px;background:#09172b;border:1px solid #315989;padding:17px;border-radius:14px;text-align:center}
+.warning-text{font-size:.78rem;color:#fca5a5;line-height:1.5;margin-bottom:13px;font-style:italic}
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.side-nav-btn{margin-top:9px;font-size:.78rem}
+.social-icons{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.social-btn{background:#09172b;border:1px solid #24456f;color:var(--blue2);padding:8px;border-radius:9px;text-align:center;text-decoration:none;font-size:.73rem;font-weight:800}
+.social-btn:hover{border-color:var(--blue2);background:#102544}
+footer{margin-top:14px;text-align:center;padding:16px;color:#7790aa;font-size:.8rem}
+.brand-credit{color:var(--blue2);font-weight:900;letter-spacing:1px}
+.shake{animation:shake .28s ease both}
+@keyframes shake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+#pageTransitionOverlay{position:fixed;inset:0;background:#020812;z-index:999999;opacity:0;visibility:hidden;pointer-events:none;transition:.18s}
+#pageTransitionOverlay.active{opacity:1;visibility:visible;pointer-events:auto}
+#pageLoader{position:fixed;inset:0;z-index:999998;background:radial-gradient(circle at center,rgba(10,29,48,.98),#02060d 70%);display:grid;place-items:center;transition:.2s}
+#pageLoader.loader-hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-box{text-align:center;width:min(88%,360px);padding:24px;border:1px solid #24456f;background:#0d1d35;border-radius:18px;box-shadow:0 12px 35px rgba(0,0,0,.4)}
+.loader-title{font-weight:900;letter-spacing:3px;color:#e8faff}
+.loader-sub{font-size:.75rem;color:var(--muted);margin:8px 0 13px}
+.loader-bar{height:5px;background:#081426;border-radius:99px;overflow:hidden}
+.loader-bar span{display:block;width:0;height:100%;background:linear-gradient(90deg,#2563eb,#67e8f9);transition:width .45s ease}
+.loader-percent{margin-top:9px;color:var(--blue2);font-size:.75rem;font-weight:900}
+.bm-modal-overlay{position:fixed;inset:0;z-index:1000000;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(1,5,15,.82)}
+.bm-modal{width:min(430px,100%);background:#0c1b31;border:1px solid #315989;border-radius:20px;box-shadow:0 18px 55px rgba(0,0,0,.58);padding:21px;color:#f5f9ff;animation:modalIn .18s ease both}
+.bm-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:#102b47;border:1px solid #315989;font-size:21px;margin-bottom:12px}
+.bm-modal h3{font-size:1rem;margin-bottom:7px;letter-spacing:.06em}
+.bm-modal p{color:#9fb2c8;font-size:.84rem;line-height:1.6}
+.bm-modal input{width:100%;margin-top:13px;padding:11px;border-radius:10px;border:1px solid #2a4d7b;background:#050d19;color:#fff;text-align:center;letter-spacing:2px;outline:none}
+.bm-modal input:focus{border-color:#79c4ff}
+.bm-modal input.auto-filled{border-color:var(--good)}
+.bm-message{margin-top:9px;color:var(--red)!important;font-weight:800}
+.bm-actions{display:flex;gap:9px;margin-top:16px}
+.bm-modal-btn{width:auto;flex:1;padding:10px 14px}
+.bm-modal-btn.primary{background:linear-gradient(135deg,#2563eb,#0891b2);border-color:#4aa8ff}
+.bm-modal-btn.secondary{background:#09172b}
+@keyframes modalIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:760px){.top-info-grid,.split-layout{grid-template-columns:1fr}.main-wrapper{padding-top:0}}
+@media(max-width:480px){body{padding:10px}.content-box{padding:16px}.main-title{font-size:1.45rem}.mod-header{align-items:flex-start}.bm-actions{flex-direction:column-reverse}.bm-modal-btn{width:100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="pageTransitionOverlay"></div>
+<div id="pageLoader">
+  <div class="loader-box">
+    <div class="loader-title">DANNMORAES // MOD TERBARU</div>
+    <div class="loader-sub" id="loadingText">Menyiapkan markas...</div>
+    <div class="loader-bar"><span id="loadingBar"></span></div>
+    <div class="loader-percent" id="loadingPercent">20%</div>
+  </div>
+</div>
+
+<div class="main-wrapper">
+<header>
+  <div class="club-badge">🔵 MANCHESTER CITY HUB 🔵</div>
+  <div class="main-title">DANNMORAES MODS <span class="verified-badge">✔</span></div>
+  <div class="web-subtitle">Mod terbaru racikan admin — simpel, bersih, tanpa iklan sampah.</div>
+</header>
+
+<div class="top-info-grid">
+  <div class="content-box zoomable-card" onclick="toggleCardZoom(this,event)">
+    <div class="side-title">🔵 Catatan Admin</div>
+    <div style="font-size:.73rem;color:#79c4ff;font-weight:800;margin-bottom:5px">🧤 Mood: Aman, Tenang, Ala Ederson</div>
+    <p class="side-desc">Santai aja bro. Kalau nemu bug atau ada fitur yang kurang, kasih tau aja. Mod di sini masih terus diracik dan dibenerin pelan-pelan.</p>
+  </div>
+  <div class="content-box zoomable-card" onclick="toggleCardZoom(this,event)">
+    <div class="side-title">🏆 Cityzen History</div>
+    <div style="font-size:.73rem;color:#fbbf24;font-weight:800;margin-bottom:5px">✨ Mentalitas Treble</div>
+    <p class="side-desc">Buat yang belum tahu, web ini kental banget sama mentalitas juara Manchester City. Dari dominasi Liga Inggris sampai <i>Treble Winners</i>. Mentalitas pemenang inilah yang dibawa pas ngeracik mod di sini! ⚽🔥</p>
+  </div>
+</div>
+
+<div class="split-layout">
+<div class="main-content">
+  <div class="content-box zoomable-card" id="modCardBox" onclick="toggleCardZoom(this,event)">
+  <div class="warning-text">⚠️️ [VERSI BETA]: Link download ini belum aktif. File belum tersedia untuk diunduh!</div>
+    <div class="warning-title">// MOD TERBARU ADMIN — KALAU NEMU BUG, JANGAN SUNGKAN BUAT LAPOR.</div>
+    <div class="mod-header">
+      <div>
+        <div class="mod-name">Citampi Stories</div>
+        <div class="mod-meta"><span>Ukuran: 223 MB</span><span>Format: .apk</span><span>Update: Terbaru</span></div>
+      </div>
+      <span class="mod-version">v1.0</span>
+    </div>
+
+    <p class="side-desc" id="modDesc" style="margin-bottom:17px;font-size:.9rem">
+      Mod Menu yang bisa nambahin uang, kupon DLL. Cek sendiri detail fiturnya setelah link berhasil dibuka, bro!
+    </p>
+
+    <button class="primary-btn" id="mainDownloadBtn" onclick="openPasswordPopup(event)">🔐 Buka Link Download</button>
+
+    <div class="success-box" id="successBox" onclick="event.stopPropagation()">
+      <div class="warning-text">Pastikan koneksi stabil sebelum mulai download, biar gak mandek di tengah jalan kek hubungan lu chuakz :v</div>
+      <a href="citampi-mod.apk" download class="primary-btn" onclick="triggerDownloadLoading(event)">📥 Mulai Download (.apk)</a>
+    </div>
+  </div>
+</div>
+
+<div class="sidebar">
+  <div class="content-box zoomable-card" onclick="toggleCardZoom(this,event)">
+    <div class="side-title">🏠 Navigasi</div>
+    <a href="index.html" class="side-nav-btn" onclick="triggerPageTransition(event,'index.html')">☚ Balik ke Markas Utama</a>
+    <a href="etalase-mod.html" class="side-nav-btn" onclick="triggerPageTransition(event,'etalase-mod.html')">📂 Etalase Mod Lainnya</a>
+    <a href="donasi.html" class="side-nav-btn" onclick="triggerPageTransition(event,'donasi.html')">☕ Dukung Admin</a>
+  </div>
+
+  <div class="content-box zoomable-card" onclick="toggleCardZoom(this,event)">
+    <div class="side-title" style="color:#fb7185;border-left-color:#fb7185">⚠️ Info & Sosmed</div>
+    <p class="side-desc" style="font-size:.75rem;margin-bottom:10px">
+      Mau check sosmed? Silahkan, walaupun kadang gak ada isinya <b>BERHARAP APE LU?</b>
+      Join DC buat laporan bug atau saran fitur baru, dan jangan rusuh. Info mod terbaru juga bakal dikabarin di sana. 🔵
+    </p>
+    <div class="social-icons">
+      <a href="https://www.tiktok.com/@dann.lolot" class="social-btn" target="_blank" rel="noopener" onclick="event.stopPropagation()">TikTok</a>
+      <a href="#" class="social-btn" onclick="event.stopPropagation();showBlueMoonModal('Link YouTube belum dipasang bro.','INFO','🔵')">YouTube</a>
+      <a href="#" class="social-btn" onclick="event.stopPropagation();showBlueMoonModal('Link Discord belum dipasang bro.','INFO','💬')">Discord</a>
+      <a href="https://www.instagram.com/dannanakbaik11?dlrf=MWEzNHhxNW42c2Y0cQ==" class="social-btn" onclick="event.stopPropagation();showBlueMoonModal('Link Instagram belum dipasang bro.','INFO','📸')">Instagram</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer>
+  &copy; 2026 DannMoraes. Blue Moon Rising! 🔵⚪<br>
+  <div style="margin-top:7px;font-size:.72rem">MADE IN <span class="brand-credit">DANNMORAES</span></div>
+</footer>
+</div>
+
+<script>
+const PASSWORDS=["MANCITY","THECITYZENS"];
+let secretPass=PASSWORDS[Math.floor(Math.random()*PASSWORDS.length)];
+let wrongCount=0;
+
+function closeModal(){
+  const m=document.getElementById('blueMoonModal');
+  if(m)m.remove();
+  document.removeEventListener('keydown',modalEsc);
+}
+function modalEsc(e){if(e.key==='Escape')closeModal();}
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function openPasswordPopup(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  if(document.getElementById('blueMoonModal'))return;
+  const overlay=document.createElement('div');
+  overlay.id='blueMoonModal';
+  overlay.className='bm-modal-overlay';
+  overlay.innerHTML=`
+    <div class="bm-modal" role="dialog" aria-modal="true">
+      <div class="bm-icon">🔐</div>
+      <h3>KUNCI DOWNLOAD</h3>
+      <p>Masukin password dulu bro. Petunjuknya: julukan suporter setianya atau nama klub biru langit Manchester, tanpa spasi.</p>
+      <input id="popupPasswordInput" type="text" autocomplete="off" placeholder="Ketik password...">
+      <p class="bm-message" id="popupMessage" style="display:none"></p>
+      <div class="bm-actions">
+        <button class="bm-modal-btn secondary" type="button" onclick="closeModal()">Batal</button>
+        <button class="bm-modal-btn primary" type="button" onclick="checkPopupPassword()">Buka Link</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  const input=overlay.querySelector('#popupPasswordInput');
+  input.focus();
+  overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')checkPopupPassword()});
+  document.addEventListener('keydown',modalEsc);
+}
+
+function checkPopupPassword(){
+  const input=document.getElementById('popupPasswordInput');
+  const msg=document.getElementById('popupMessage');
+  if(!input)return;
+  const value=input.value.trim().toUpperCase();
+  if(value===secretPass){
+    closeModal();
+    document.getElementById('mainDownloadBtn').style.display='none';
+    document.getElementById('modDesc').style.display='none';
+    document.getElementById('successBox').style.display='block';
+    showBlueMoonModal('Password benar. Link download sudah terbuka. Gas download bro!','LINK TERBUKA','✅');
+    return;
+  }
+
+  wrongCount++;
+  input.classList.remove('auto-filled');
+  void input.offsetWidth;
+  input.classList.add('shake');
+
+  const roasts=[
+    'Eh salah password-nya bro! Cek lagi kisi-kisi di atas.',
+    'Yaelah, gitu aja salah! Kurang piknik lu ya?',
+    'Masih salah?, yaudah gw kasih dah passwordnya nih.',
+    'Oke bro, daripada perang sama password... gw bantu.'
+  ];
+
+  msg.style.display='block';
+  msg.style.color='#fb7185';
+
+  if(wrongCount>=3){
+    input.value=secretPass;
+    input.classList.add('auto-filled');
+    msg.innerHTML='⚡ <b>Auto-Fill aktif.</b> Password sudah gw masukin. Tinggal pencet <b>Buka Link</b>.';
+    msg.style.color='#52d6a0';
+  }else{
+    msg.textContent=roasts[Math.min(wrongCount-1,roasts.length-1)];
+    input.value='';
+  }
+}
+
+function showBlueMoonModal(message,title='BLUE MOON SYSTEM',icon='🔵'){
+  const old=document.getElementById('blueMoonModal');
+  if(old)old.remove();
+  const overlay=document.createElement('div');
+  overlay.id='blueMoonModal';
+  overlay.className='bm-modal-overlay';
+  overlay.innerHTML=`
+    <div class="bm-modal" role="dialog" aria-modal="true">
+      <div class="bm-icon">${icon}</div>
+      <h3>${esc(title)}</h3>
+      <p>${esc(message).replace(/\n/g,'<br>')}</p>
+      <div class="bm-actions">
+        <button class="bm-modal-btn primary" type="button" onclick="closeModal()">Oke, gas 😎</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal()});
+  document.addEventListener('keydown',modalEsc);
+  setTimeout(()=>overlay.querySelector('button')?.focus(),20);
+}
+
+function triggerPageTransition(event,targetUrl){
+  event.preventDefault();event.stopPropagation();
+  const overlay=document.getElementById('pageTransitionOverlay');
+  overlay.classList.add('active');
+  setTimeout(()=>window.location.href=targetUrl,190);
+}
+
+function triggerDownloadLoading(event){
+  const btn=event.currentTarget;
+  btn.style.pointerEvents='none';
+  const original=btn.innerHTML;
+  btn.innerHTML='⏳ Menyiapkan File...';
+  setTimeout(()=>{
+    btn.innerHTML='✅ File Sedang Diunduh!';
+    setTimeout(()=>{btn.innerHTML=original;btn.style.pointerEvents='auto'},2500);
+  },700);
+}
+
+function toggleCardZoom(card,event){
+  if(event.target.closest('a,button,input'))return;
+  const zoomed=card.classList.contains('zoomed');
+  document.querySelectorAll('.zoomable-card').forEach(c=>c.classList.remove('zoomed'));
+  if(!zoomed)card.classList.add('zoomed');
+}
+
+window.addEventListener('load',()=>{
+  const text=document.getElementById('loadingText');
+  const bar=document.getElementById('loadingBar');
+  const percent=document.getElementById('loadingPercent');
+  const steps=[
+    ['Menyiapkan markas...',25],
+    ['Mengecek file mod...',55],
+    ['Menyelaraskan mentalitas City...',80],
+    ['Sistem siap, gaskan!',100]
+  ];
+  let i=0;
+  const timer=setInterval(()=>{
+    const [t,p]=steps[i++];
+    text.textContent=t;bar.style.width=p+'%';percent.textContent=p+'%';
+    if(i>=steps.length)clearInterval(timer);
+  },160);
+  setTimeout(()=>document.getElementById('pageLoader').classList.add('loader-hidden'),760);
+});
+</script>
+</body>
+</html>

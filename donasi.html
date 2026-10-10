@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+
+  <title>DANNMORAES // SUPPORT CORNER</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #040914;
+      --bg2: #081426;
+      --card: rgba(11, 24, 42, .9);
+      --blue: #3aa7ff;
+      --blue2: #82ceff;
+      --text: #eaf6ff;
+      --muted: #8da6bd;
+      --border: rgba(80, 170, 255, .17);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+
+      background:
+        radial-gradient(circle at 50% -15%, rgba(35,125,220,.25), transparent 38%),
+        radial-gradient(circle at 10% 50%, rgba(30,100,180,.08), transparent 25%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: .48;
+
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1px),
+        radial-gradient(circle, rgba(120,200,255,.55) 1px, transparent 1px);
+
+      background-size: 90px 90px, 145px 145px;
+      background-position: 10px 20px, 60px 80px;
+    }
+
+    .glow {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+
+      background: rgba(40,140,230,.045);
+      filter: blur(80px);
+    }
+
+    .glow.one {
+      top: 20%;
+      left: -180px;
+    }
+
+    .glow.two {
+      bottom: 5%;
+      right: -180px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+
+    .navbar {
+      width: 100%;
+      border-bottom: 1px solid var(--border);
+      background: rgba(4,9,20,.86);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-inner {
+      width: min(1100px,92%);
+      min-height: 68px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .back {
+      padding: 9px 15px;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      color: var(--muted);
+      font-size: 13px;
+
+      transition: .2s;
+    }
+
+    .back:hover {
+      color: white;
+      border-color: rgba(80,170,255,.45);
+      background: rgba(58,167,255,.08);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    main {
+      width: min(900px,92%);
+      margin: auto;
+      padding: 65px 0 80px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .moon {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+      font-size: 38px;
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          rgba(255,255,255,.35),
+          rgba(58,167,255,.12) 50%,
+          transparent 72%
+        );
+
+      border: 1px solid rgba(100,190,255,.18);
+
+      box-shadow:
+        0 0 45px rgba(58,167,255,.14),
+        inset 0 0 25px rgba(58,167,255,.08);
+    }
+
+    .badge {
+      display: inline-block;
+
+      padding: 7px 13px;
+      margin-bottom: 17px;
+
+      border: 1px solid rgba(58,167,255,.25);
+      border-radius: 999px;
+
+      color: var(--blue2);
+      background: rgba(58,167,255,.06);
+
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+    }
+
+    h1 {
+      font-size: clamp(36px,7vw,58px);
+      line-height: 1;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: var(--blue);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       QUOTE
+    ========================= */
+
+    .quote {
+      max-width: 650px;
+      margin: 0 auto 25px;
+
+      padding: 15px 18px;
+
+      border-left: 2px solid var(--blue);
+      border-radius: 0 10px 10px 0;
+
+      background: rgba(58,167,255,.045);
+
+      color: #a9bfd2;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    /* =========================
+       MAIN CARD
+    ========================= */
+
+    .support-card {
+      max-width: 700px;
+      margin: auto;
+
+      padding: 32px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(16,31,52,.94),
+          rgba(7,17,31,.94)
+        );
+
+      border: 1px solid var(--border);
+      border-radius: 20px;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.28),
+        0 0 45px rgba(40,130,220,.04);
+    }
+
+    .card-title {
+      text-align: center;
+      font-size: 23px;
+      margin-bottom: 9px;
+    }
+
+    .card-desc {
+      max-width: 560px;
+      margin: auto auto 27px;
+
+      text-align: center;
+      color: var(--muted);
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       METHOD
+    ========================= */
+
+    .methods {
+      display: grid;
+      gap: 13px;
+    }
+
+    .method {
+      padding: 19px;
+
+      border-radius: 14px;
+
+      background: rgba(0,0,0,.17);
+      border: 1px solid rgba(255,255,255,.055);
+
+      transition: .2s;
+    }
+
+    .method:hover {
+      transform: translateY(-2px);
+      border-color: rgba(80,170,255,.22);
+    }
+
+    .method-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .method-icon {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 11px;
+
+      background: rgba(58,167,255,.09);
+      border: 1px solid rgba(58,167,255,.16);
+
+      font-size: 19px;
+    }
+
+    .method-title {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .method-sub {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .main-btn {
+      width: 100%;
+      display: block;
+
+      padding: 14px 18px;
+
+      border: 0;
+      border-radius: 11px;
+
+      text-align: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #238ee0,
+          #42b0ff
+        );
+
+      color: white;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 9px 25px rgba(35,142,224,.16);
+
+      transition: .2s;
+    }
+
+    .main-btn:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 13px 30px rgba(35,142,224,.25);
+    }
+
+    /* =========================
+       ACCOUNT BOX
+    ========================= */
+
+    .account-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .account {
+      flex: 1;
+      min-width: 0;
+
+      padding: 13px 14px;
+
+      border-radius: 9px;
+
+      background: rgba(255,255,255,.035);
+
+      color: var(--blue2);
+
+      font-size: 14px;
+      font-weight: 700;
+
+      word-break: break-word;
+    }
+
+    .account small {
+      display: block;
+      margin-top: 6px;
+
+      color: #71889d;
+
+      font-size: 10px;
+      line-height: 1.5;
+      font-weight: normal;
+    }
+
+    .copy-btn {
+      width: 48px;
+      flex-shrink: 0;
+
+      border: 1px solid rgba(80,170,255,.16);
+      border-radius: 9px;
+
+      background: rgba(58,167,255,.07);
+
+      color: var(--blue2);
+
+      cursor: pointer;
+      font-size: 17px;
+
+      transition: .2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(58,167,255,.14);
+      border-color: rgba(80,170,255,.3);
+    }
+
+    /* =========================
+       SAWERIA HINT
+    ========================= */
+
+    .method-hint {
+      margin-top: 10px;
+      padding: 10px 12px;
+
+      border-radius: 8px;
+
+      background: rgba(58,167,255,.045);
+      border: 1px solid rgba(58,167,255,.08);
+
+      color: #71889d;
+
+      font-size: 10px;
+      line-height: 1.55;
+
+      text-align: center;
+    }
+
+    .method-hint b {
+      color: var(--blue2);
+    }
+
+    /* =========================
+       BADGE
+    ========================= */
+
+    .mini-badge {
+      display: inline-block;
+
+      margin-top: 9px;
+      padding: 5px 8px;
+
+      border-radius: 6px;
+
+      background: rgba(65,190,130,.07);
+      border: 1px solid rgba(65,190,130,.13);
+
+      color: #7fcfa8;
+
+      font-size: 9px;
+      font-weight: bold;
+      letter-spacing: .3px;
+    }
+
+    /* =========================
+       NOTE
+    ========================= */
+
+    .note {
+      margin-top: 20px;
+
+      padding: 15px 16px;
+
+      border: 1px dashed rgba(80,170,255,.16);
+      border-radius: 11px;
+
+      color: #8198ad;
+
+      font-size: 11px;
+      line-height: 1.7;
+
+      text-align: center;
+    }
+
+    .note b {
+      color: #a9c8df;
+    }
+
+    /* =========================
+       PROJECT SECTION
+    ========================= */
+
+    .projects-title {
+      text-align: center;
+
+      margin: 45px 0 16px;
+
+      color: #b6cce0;
+
+      font-size: 12px;
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+    }
+
+    .why {
+      max-width: 700px;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 12px;
+    }
+
+    .why-item {
+      padding: 19px 14px;
+
+      text-align: center;
+
+      border: 1px solid rgba(80,170,255,.11);
+
+      background: rgba(12,25,43,.48);
+
+      border-radius: 13px;
+
+      transition: .2s;
+    }
+
+    .why-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(80,170,255,.23);
+    }
+
+    .why-icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .why-item strong {
+      display: block;
+
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .why-item span {
+      color: var(--muted);
+
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 25px 15px 35px;
+
+      text-align: center;
+
+      border-top: 1px solid rgba(80,170,255,.07);
+
+      color: #5e7488;
+      font-size: 11px;
+    }
+
+    footer b {
+      color: #8aa9c2;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast {
+      position: fixed;
+
+      left: 50%;
+      bottom: 25px;
+
+      transform: translate(-50%, 20px);
+
+      padding: 11px 17px;
+
+      border: 1px solid rgba(80,170,255,.2);
+      border-radius: 10px;
+
+      background: rgba(8,20,36,.96);
+
+      color: #dff3ff;
+
+      font-size: 12px;
+
+      opacity: 0;
+      pointer-events: none;
+
+      box-shadow: 0 12px 35px rgba(0,0,0,.35);
+
+      transition: .25s;
+
+      z-index: 100;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width:600px) {
+
+      .nav-inner {
+        min-height: 60px;
+      }
+
+      .logo {
+        font-size: 16px;
+      }
+
+      .back {
+        padding: 8px 11px;
+        font-size: 11px;
+      }
+
+      main {
+        padding: 52px 0 60px;
+      }
+
+      .moon {
+        width: 65px;
+        height: 65px;
+        font-size: 30px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .support-card {
+        padding: 23px 17px;
+        border-radius: 16px;
+      }
+
+      .account-row {
+        align-items: stretch;
+      }
+
+      .copy-btn {
+        width: 44px;
+      }
+
+      .why {
+        grid-template-columns: 1fr;
+      }
+
+      .why-item {
+        padding: 15px;
+      }
+
+      .toast {
+        width: max-content;
+        max-width: 90%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="stars"></div>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar">
+
+    <div class="nav-inner">
+
+      <div class="logo">
+        DANN<span>MORAES</span>
+      </div>
+
+      <a href="index.html" class="back">
+        ← Kembali
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <main>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+      <div class="moon">
+        🌙
+      </div>
+
+      <div class="badge">
+        SUPPORT CORNER
+      </div>
+
+      <h1>
+        MAU <span>SUPPORT</span> GW?
+      </h1>
+
+      <p>
+        Kalau lu pernah terbantu sama mod, tools, atau project
+        yang gw bikin, dan lu pengen ikut support pengembangannya,
+        gw sediain beberapa pilihan di bawah.
+      </p>
+
+    </section>
+
+
+    <!-- QUOTE -->
+
+    <div class="quote">
+      💬 “Gak wajib support kok. Lu pake dan menikmati project gw
+      aja udah bikin gw seneng. Kalau lu mau bantu,
+      ya gw terima dengan senang hati 😎”
+    </div>
+
+
+    <!-- SUPPORT CARD -->
+
+    <section class="support-card">
+
+      <h2 class="card-title">
+        Pilihan Support
+      </h2>
+
+      <p class="card-desc">
+        Pilih cara yang paling nyaman buat lu.
+        Semuanya opsional dan gak ada kewajiban apa pun.
+      </p>
+
+
+      <div class="methods">
+
+
+        <!-- SAWERIA -->
+
+        <div class="method">
+
+          <div class="method-head">
+
+            <div class="method-icon">
+              💙
+            </div>
+
+            <div>
+
+              <div class="method-title">
+                Saweria
+              </div>
+
+              <div class="method-sub">
+                Cara paling praktis buat support gw
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <a
+            href="https://saweria.co/dannmoraes"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="main-btn"
+          >
+            BUKA SAWERIA →
+          </a>
+
+
+          <div class="method-hint">
+            💡 Kalau tersedia, pilih <b>DANA</b> saat pembayaran.
+            Support lu bakal bantu gw terus ngembangin project.
+          </div>
+
+
+          <div class="mini-badge">
+            ✦ PRAKTIS & AMAN
+          </div>
+
+        </div>
+
+
+        <!-- DANA MANUAL -->
+
+        <div class="method">
+
+          <div class="method-head">
+
+            <div class="method-icon">
+              💰
+            </div>
+
+            <div>
+
+              <div class="method-title">
+                DANA Manual
+              </div>
+
+              <div class="method-sub">
+                Langsung ke gw tanpa platform
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="account-row">
+
+            <div class="account">
+
+              <span id="danaNumber">
+                NOMOR DANA LU
+              </span>
+
+              <small>
+                Transfer langsung ke gw.
+                Untuk transfer manual, gak ada potongan platform dari sisi gw.
+              </small>
+
+            </div>
+
+
+            <button
+              class="copy-btn"
+              onclick="copyNumber('danaNumber')"
+              title="Copy nomor DANA"
+            >
+              📋
+            </button>
+
+          </div>
+
+
+          <div class="mini-badge">
+            ✦ TANPA POTONGAN PLATFORM
+          </div>
+
+        </div>
+
+
+        <!-- AXIS -->
+
+        <div class="method">
+
+          <div class="method-head">
+
+            <div class="method-icon">
+              📱
+            </div>
+
+            <div>
+
+              <div class="method-title">
+                AXIS
+              </div>
+
+              <div class="method-sub">
+                Support lewat pulsa
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="account-row">
+
+            <div class="account">
+
+              <span id="axisNumber">
+                NOMOR AXIS LU
+              </span>
+
+              <small>
+                Buat lu yang lebih nyaman support lewat pulsa.
+                Langsung ke nomor gw tanpa platform donasi.
+              </small>
+
+            </div>
+
+
+            <button
+              class="copy-btn"
+              onclick="copyNumber('axisNumber')"
+              title="Copy nomor AXIS"
+            >
+              📋
+            </button>
+
+          </div>
+
+
+          <div class="mini-badge">
+            ✦ LANGSUNG KE NOMOR GW
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- NOTE -->
+
+      <div class="note">
+
+        ✨ <b>Yang paling penting bukan nominalnya.</b><br>
+
+        Lu gak perlu maksa diri buat support gw.
+        Kalau belum bisa sekarang, santai aja.
+
+        Download mod, pakai tools, kasih feedback,
+        atau sekadar mampir ke website ini juga
+        udah berarti banget buat gw. ❤️
+
+        <br><br>
+
+        Kalau lu memilih metode manual,
+        transfer atau pulsa langsung diterima oleh gw
+        tanpa melalui platform donasi pihak ketiga.
+
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <div class="projects-title">
+      Support lu bakal bantu gw di bagian ini
+    </div>
+
+
+    <section class="why">
+
+
+      <div class="why-item">
+
+        <div class="why-icon">
+          🛠️
+        </div>
+
+        <strong>
+          Modding
+        </strong>
+
+        <span>
+          Bikin mod baru, eksperimen,
+          dan update project lama.
+        </span>
+
+      </div>
+
+
+      <div class="why-item">
+
+        <div class="why-icon">
+          ⚙️
+        </div>
+
+        <strong>
+          Tools
+        </strong>
+
+        <span>
+          Ngembangin tools yang bisa
+          dipakai dan dinikmati gratis.
+        </span>
+
+      </div>
+
+
+      <div class="why-item">
+
+        <div class="why-icon">
+          🌐
+        </div>
+
+        <strong>
+          Website
+        </strong>
+
+        <span>
+          Ngurus dan terus ngembangin
+          DannMoraes Mod Hub.
+        </span>
+
+      </div>
+
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 <b>DannMoraes Mod Hub</b>
+    · Dibuat dengan ❤️ oleh gw
+
+  </footer>
+
+
+  <!-- TOAST -->
+
+  <div class="toast" id="toast">
+    Nomor berhasil disalin 📋
+  </div>
+
+
+  <script>
+
+    function copyNumber(id) {
+
+      const element = document.getElementById(id);
+
+      if (!element) return;
+
+      const number = element.innerText.trim();
+
+      if (
+        number === "NOMOR DANA LU" ||
+        number === "NOMOR AXIS LU"
+      ) {
+        showToast("Nomornya belum lu isi bro 😭");
+        return;
+      }
+
+      navigator.clipboard.writeText(number)
+        .then(() => {
+          showToast("Nomor berhasil disalin 📋");
+        })
+        .catch(() => {
+
+          const textarea = document.createElement("textarea");
+
+          textarea.value = number;
+
+          document.body.appendChild(textarea);
+
+          textarea.select();
+
+          document.execCommand("copy");
+
+          textarea.remove();
+
+          showToast("Nomor berhasil disalin 📋");
+        });
+    }
+
+
+    function showToast(message) {
+
+      const toast = document.getElementById("toast");
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      clearTimeout(window.toastTimer);
+
+      window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2200);
+    }
+
+  </script>
+
+</body>
+</html>

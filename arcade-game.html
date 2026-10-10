@@ -1,0 +1,4977 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#030712">
+
+<title>DANNMORAES // ARCADE MASTER</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Segoe UI,Arial,sans-serif
+}
+
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 50% -10%,#12365b 0,transparent 35%),
+    linear-gradient(135deg,#02050b,#071321 55%,#02050b);
+  color:#eafcff;
+  padding:18px
+}
+
+.wrap{
+  max-width:1100px;
+  margin:auto
+}
+
+header{
+  text-align:center;
+  padding:18px 10px 24px
+}
+
+h1{
+  font-size:clamp(1.5rem,5vw,2.5rem);
+  letter-spacing:3px;
+  text-shadow:0 0 22px #22d3ee
+}
+
+.sub{
+  color:#7fa4bd;
+  font:700 .72rem monospace;
+  letter-spacing:2px;
+  margin-top:7px
+}
+
+/* =========================
+   GAME MENU
+========================= */
+
+.game-menu{
+  display:block;
+  background:rgba(5,14,26,.94);
+  border:1px solid #1b4662;
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 18px 60px #0008;
+  margin-bottom:14px
+}
+
+.game-menu.hidden{
+  display:none
+}
+
+.menu-title{
+  font-size:1.1rem;
+  font-weight:900;
+  color:#67e8f9;
+  margin-bottom:5px
+}
+
+.menu-sub{
+  color:#7795aa;
+  font:700 .72rem monospace;
+  margin-bottom:14px
+}
+
+.game-list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px
+}
+
+.game-card{
+  min-height:92px;
+  padding:13px;
+  border-radius:14px;
+  border:1px solid #183956;
+  background:linear-gradient(145deg,#0a1b2d,#06111e);
+  color:#dffaff;
+  text-align:left;
+  cursor:pointer;
+  transition:.15s;
+  touch-action:manipulation
+}
+
+.game-card:hover{
+  border-color:#38bdf8;
+  background:#0d3048;
+  transform:translateY(-2px)
+}
+
+.game-card:active{
+  transform:scale(.97)
+}
+
+.game-card .game-icon{
+  font-size:1.45rem;
+  display:block;
+  margin-bottom:6px
+}
+
+.game-card .game-name{
+  font-weight:900;
+  font-size:.85rem
+}
+
+.game-card .game-desc{
+  color:#718da2;
+  font-size:.65rem;
+  margin-top:4px
+}
+
+/* =========================
+   PANELS
+========================= */
+
+.panel{
+  display:none;
+  background:rgba(5,14,26,.94);
+  border:1px solid #1b4662;
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 18px 60px #0008
+}
+
+.panel.active{
+  display:block
+}
+
+.gamehead{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px
+}
+
+.gamehead h2{
+  font-size:1rem;
+  text-align:center
+}
+
+.score{
+  color:#67e8f9;
+  font:900 .8rem monospace;
+  text-align:right
+}
+
+.back-menu{
+  background:#0a1b2d;
+  border:1px solid #25516e;
+  color:#dffaff;
+  border-radius:10px;
+  padding:8px 11px;
+  font-weight:900;
+  cursor:pointer;
+  touch-action:manipulation
+}
+
+.back-menu:active{
+  transform:scale(.94)
+}
+
+/* =========================
+   GENERAL BUTTONS
+========================= */
+
+.controls,
+.action-controls{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px
+}
+
+.controls button,
+.action,
+.action-controls button{
+  background:#0a1b2d;
+  color:#dffaff;
+  border:1px solid #25516e;
+  border-radius:10px;
+  padding:10px 13px;
+  min-height:42px;
+  font-weight:800;
+  cursor:pointer;
+  touch-action:manipulation
+}
+
+.controls button:hover,
+.action:hover,
+.action-controls button:hover{
+  border-color:#38bdf8;
+  background:#0d3048
+}
+
+.controls button:active,
+.action-controls button:active{
+  transform:scale(.94)
+}
+
+.info{
+  color:#7795aa;
+  font-size:.72rem;
+  text-align:center;
+  margin:10px 0
+}
+
+/* =========================
+   MOBILE D-PAD
+========================= */
+
+.mobile-controls{
+  display:grid;
+  grid-template-columns:repeat(3,58px);
+  grid-template-rows:repeat(3,58px);
+  gap:7px;
+  justify-content:center;
+  align-items:center;
+  margin:14px auto 4px;
+  user-select:none;
+  touch-action:none
+}
+
+.mobile-controls button{
+  width:58px;
+  height:58px;
+  border-radius:14px;
+  border:1px solid #28617f;
+  background:linear-gradient(145deg,#0c263d,#071525);
+  color:#dffaff;
+  font-size:1.35rem;
+  font-weight:900;
+  box-shadow:0 5px 15px #0008;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:none
+}
+
+.mobile-controls button:active{
+  transform:scale(.91);
+  background:#0e7490;
+  border-color:#67e8f9;
+  box-shadow:0 0 18px #22d3ee88
+}
+
+.mobile-controls .empty{
+  visibility:hidden
+}
+
+/* =========================
+   GAME OVER POPUP
+========================= */
+
+.gameover-overlay{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,4,12,.78);
+  backdrop-filter:blur(8px)
+}
+
+.gameover-overlay.show{
+  display:flex;
+  animation:gameoverFade .2s ease
+}
+
+.gameover-box{
+  width:min(390px,94vw);
+  padding:25px 20px;
+  border-radius:22px;
+  text-align:center;
+  background:
+    radial-gradient(circle at 50% 0%,#123d58,#071421 65%);
+  border:1px solid #2b7898;
+  box-shadow:
+    0 0 35px #22d3ee33,
+    0 25px 80px #000c;
+  animation:gameoverPop .25s cubic-bezier(.2,.8,.2,1)
+}
+
+.gameover-icon{
+  font-size:3rem;
+  margin-bottom:8px;
+  filter:drop-shadow(0 0 12px #22d3ee)
+}
+
+.gameover-title{
+  color:#67e8f9;
+  font-size:1.65rem;
+  font-weight:1000;
+  letter-spacing:2px;
+  margin-bottom:6px
+}
+
+.gameover-title.win{
+  color:#86efac
+}
+
+.gameover-game{
+  color:#8baabd;
+  font-size:.8rem;
+  font-family:monospace;
+  margin-bottom:18px
+}
+
+.gameover-score{
+  padding:12px;
+  margin-bottom:18px;
+  border-radius:12px;
+  background:#020912aa;
+  border:1px solid #173b52;
+  color:#dffaff;
+  font-weight:900
+}
+
+.gameover-buttons{
+  display:flex;
+  gap:9px;
+  justify-content:center
+}
+
+.gameover-buttons button{
+  flex:1;
+  min-height:48px;
+  border:1px solid #28617f;
+  border-radius:12px;
+  background:#0a1f32;
+  color:#dffaff;
+  font-weight:900;
+  cursor:pointer
+}
+
+.gameover-buttons button.primary{
+  background:#0e7490;
+  border-color:#38bdf8
+}
+
+.gameover-buttons button:active{
+  transform:scale(.95)
+}
+
+@keyframes gameoverFade{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes gameoverPop{
+  from{
+    opacity:0;
+    transform:scale(.82) translateY(15px)
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0)
+  }
+}
+
+/* =========================
+   SNAKE
+========================= */
+
+canvas{
+  display:block;
+  width:100%;
+  max-width:720px;
+  height:auto;
+  margin:auto;
+  background:#02060d;
+  border:1px solid #15344c;
+  border-radius:12px;
+  touch-action:none
+}
+
+/* =========================
+   MINES
+========================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:5px;
+  max-width:420px;
+  margin:auto
+}
+
+.cell{
+  aspect-ratio:1;
+  background:#0a1929;
+  border:1px solid #183a54;
+  border-radius:6px;
+  display:grid;
+  place-items:center;
+  font-size:1.1rem;
+  cursor:pointer;
+  user-select:none
+}
+
+.cell.open{
+  background:#10273b
+}
+
+.cell.mine{
+  background:#5b1823
+}
+
+.cell.flag{
+  color:#67e8f9
+}
+
+/* =========================
+   MEMORY
+========================= */
+
+.memory{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  max-width:500px;
+  margin:auto
+}
+
+.card{
+  aspect-ratio:1;
+  perspective:500px;
+  cursor:pointer
+}
+
+.card>div{
+  width:100%;
+  height:100%;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:#092039;
+  border:1px solid #205271;
+  font-size:1.5rem;
+  transition:.2s
+}
+
+.card.open>div{
+  background:#0d3349
+}
+
+/* =========================
+   AIM
+========================= */
+
+.aim-area{
+  position:relative;
+  max-width:720px;
+  height:400px;
+  background:#02060d;
+  border:1px solid #15344c;
+  border-radius:12px;
+  margin:auto;
+  overflow:hidden;
+  touch-action:none
+}
+
+.target{
+  position:absolute;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#38bdf8;
+  border:3px solid #dffaff;
+  box-shadow:0 0 22px #22d3ee;
+  cursor:pointer
+}
+
+/* =========================
+   RUNNER
+========================= */
+
+.runner-area{
+  position:relative;
+  max-width:720px;
+  height:300px;
+  margin:auto;
+  background:#07111d;
+  border:1px solid #15344c;
+  border-radius:12px;
+  overflow:hidden
+}
+
+.player{
+  position:absolute;
+  width:30px;
+  height:30px;
+  bottom:28px;
+  left:70px;
+  background:#67e8f9;
+  border-radius:6px;
+  box-shadow:0 0 15px #22d3ee
+}
+
+.obstacle{
+  position:absolute;
+  bottom:28px;
+  width:25px;
+  height:45px;
+  background:#f87171;
+  border-radius:5px
+}
+
+.ground{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:28px;
+  background:#0b2435
+}
+
+/* =========================
+   SPACE
+========================= */
+
+.space-area{
+  position:relative;
+  max-width:720px;
+  height:400px;
+  margin:auto;
+  background:#01040a;
+  border:1px solid #15344c;
+  border-radius:12px;
+  overflow:hidden
+}
+
+.ship{
+  position:absolute;
+  width:30px;
+  height:22px;
+  background:#67e8f9;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  clip-path:polygon(50% 0,100% 100%,50% 75%,0 100%);
+  transition:left .04s linear
+}
+
+.enemy,
+.bullet{
+  position:absolute
+}
+
+.enemy{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:#fb7185
+}
+
+.bullet{
+  width:4px;
+  height:12px;
+  background:#fff
+}
+
+/* =========================
+   PONG
+========================= */
+
+.pong-area{
+  max-width:720px;
+  height:380px;
+  position:relative;
+  background:#02060d;
+  border:1px solid #15344c;
+  border-radius:12px;
+  margin:auto;
+  overflow:hidden
+}
+
+.paddle{
+  position:absolute;
+  width:12px;
+  height:80px;
+  background:#67e8f9;
+  border-radius:6px
+}
+
+.ball{
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 14px #fff
+}
+
+/* =========================
+   RACING
+========================= */
+
+.race-area{
+  position:relative;
+  max-width:420px;
+  height:430px;
+  margin:auto;
+  background:#101820;
+  border:1px solid #31516a;
+  border-radius:12px;
+  overflow:hidden
+}
+
+.road{
+  position:absolute;
+  left:18%;
+  width:64%;
+  height:100%;
+  background:#1a2028;
+  border-left:3px dashed #64748b;
+  border-right:3px dashed #64748b
+}
+
+.car{
+  position:absolute;
+  width:42px;
+  height:65px;
+  background:#38bdf8;
+  border-radius:9px;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%)
+}
+
+.enemycar{
+  position:absolute;
+  width:42px;
+  height:65px;
+  background:#fb7185;
+  border-radius:9px
+}
+
+/* =========================
+   KATANA
+========================= */
+
+.katana-area{
+  max-width:720px;
+  height:400px;
+  margin:auto;
+  position:relative;
+  background:radial-gradient(circle,#102a42,#02060d 70%);
+  border:1px solid #15344c;
+  border-radius:12px;
+  overflow:hidden
+}
+
+.slash{
+  position:absolute;
+  width:5px;
+  height:220px;
+  background:#dffaff;
+  box-shadow:0 0 22px #38bdf8;
+  transform:rotate(35deg);
+  left:48%;
+  top:22%;
+  opacity:0
+}
+
+.slash.go{
+  animation:slash .35s ease
+}
+
+.dummy{
+  position:absolute;
+  right:17%;
+  bottom:45px;
+  width:65px;
+  height:170px;
+  background:#5b3a27;
+  border-radius:10px
+}
+
+@keyframes slash{
+  0%{
+    opacity:0;
+    transform:rotate(35deg) scale(.5)
+  }
+  40%{opacity:1}
+  100%{
+    opacity:0;
+    transform:rotate(35deg) scale(1.3)
+  }
+}
+
+/* =========================
+   RPG
+========================= */
+
+.rpg{
+  max-width:720px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 230px;
+  gap:12px
+}
+
+.rpgmap{
+  height:360px;
+  background:#0b1c20;
+  border:1px solid #254d4e;
+  border-radius:12px;
+  position:relative;
+  overflow:hidden
+}
+
+.hero{
+  position:absolute;
+  width:28px;
+  height:28px;
+  background:#67e8f9;
+  border-radius:50%
+}
+
+.enemyunit{
+  position:absolute;
+  width:28px;
+  height:28px;
+  background:#f87171;
+  border-radius:50%
+}
+
+.side{
+  background:#071421;
+  border:1px solid #183956;
+  border-radius:12px;
+  padding:12px;
+  font-size:.78rem;
+  line-height:1.6
+}
+
+/* =========================
+   TOWER DEFENSE
+========================= */
+
+.td{
+  max-width:720px;
+  height:390px;
+  margin:auto;
+  position:relative;
+  background:#07151a;
+  border:1px solid #214952;
+  border-radius:12px;
+  overflow:hidden
+}
+
+.tower{
+  position:absolute;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:#38bdf8;
+  border:3px solid #bff7ff;
+  display:grid;
+  place-items:center;
+  cursor:pointer
+}
+
+.creep{
+  position:absolute;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:#fb7185
+}
+
+.bar{
+  position:absolute;
+  height:5px;
+  background:#22c55e;
+  top:-7px;
+  left:0
+}
+
+.towerbase{
+  left:12px;
+  top:12px
+}
+
+/* =========================
+   TETRIS
+========================= */
+
+#tetCanvas{
+  width:300px;
+  max-width:100%;
+  margin:auto
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:750px){
+
+  .game-list{
+    grid-template-columns:repeat(2,1fr)
+  }
+}
+
+@media(max-width:650px){
+
+  body{
+    padding:10px
+  }
+
+  .panel{
+    padding:10px
+  }
+
+  .rpg{
+    grid-template-columns:1fr
+  }
+
+  .rpgmap{
+    height:300px
+  }
+
+  .aim-area,
+  .space-area,
+  .pong-area,
+  .katana-area,
+  .td{
+    height:320px
+  }
+
+  .runner-area{
+    height:280px
+  }
+}
+
+@media(max-width:400px){
+
+  .game-list{
+    grid-template-columns:1fr
+  }
+
+  .mobile-controls{
+    grid-template-columns:repeat(3,52px);
+    grid-template-rows:repeat(3,52px)
+  }
+
+  .mobile-controls button{
+    width:52px;
+    height:52px
+  }
+
+  .gameover-box{
+    padding:21px 15px
+  }
+
+  .gamehead{
+    grid-template-columns:auto 1fr auto;
+    gap:6px
+  }
+
+  .gamehead h2{
+    font-size:.9rem
+  }
+
+  .back-menu{
+    padding:7px 8px;
+    font-size:.7rem
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     CUSTOM GAME OVER POPUP
+========================= -->
+
+<div class="gameover-overlay" id="gameOverPopup">
+
+  <div class="gameover-box">
+
+    <div class="gameover-icon" id="gameOverIcon">💀</div>
+
+    <div class="gameover-title" id="gameOverTitle">
+      GAME OVER
+    </div>
+
+    <div class="gameover-game" id="gameOverGame">
+      DANNMORAES ARCADE
+    </div>
+
+    <div class="gameover-score" id="gameOverScore">
+      SCORE: 0
+    </div>
+
+    <div class="gameover-buttons">
+
+      <button onclick="closeGameOver()">
+        ✕ CLOSE
+      </button>
+
+      <button
+        class="primary"
+        id="gameOverRestart">
+        🔄 PLAY AGAIN
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="wrap">
+
+<header>
+  <h1>🔵 DANNMORAES // ARCADE MASTER</h1>
+
+  <div class="sub">
+    BLUE MOON WEB ARCADE // PLAY DIRECTLY IN YOUR BROWSER
+  </div>
+</header>
+
+<!-- =========================
+     GAME MENU
+========================= -->
+
+<section class="game-menu" id="gameMenu">
+
+  <div class="menu-title">
+    🎮 PILIH GAME
+  </div>
+
+  <div class="menu-sub">
+    SELECT YOUR GAME // 12 ARCADE MODES
+  </div>
+
+  <div
+    class="game-list"
+    id="gameList">
+  </div>
+
+</section>
+
+<!-- =========================
+     SNAKE
+========================= -->
+
+<section class="panel" id="game-snake">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🐍 Snake</h2>
+
+    <span
+      class="score"
+      id="snakeScore">
+      0
+    </span>
+
+  </div>
+
+  <canvas
+    id="snakeCanvas"
+    width="500"
+    height="500">
+  </canvas>
+
+  <div class="action-controls">
+
+    <button onclick="snakeStart()">
+      🔄 START / RESTART
+    </button>
+
+  </div>
+
+  <div class="mobile-controls">
+
+    <button class="empty"></button>
+
+    <button onpointerdown="snakeDir(0,-1)">
+      ▲
+    </button>
+
+    <button class="empty"></button>
+
+    <button onpointerdown="snakeDir(-1,0)">
+      ◀
+    </button>
+
+    <button class="empty">
+      ●
+    </button>
+
+    <button onpointerdown="snakeDir(1,0)">
+      ▶
+    </button>
+
+    <button class="empty"></button>
+
+    <button onpointerdown="snakeDir(0,1)">
+      ▼
+    </button>
+
+    <button class="empty"></button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     PONG
+========================= -->
+
+<section class="panel" id="game-pong">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🏓 Pong</h2>
+
+    <span
+      class="score"
+      id="pongScore">
+      0 : 0
+    </span>
+
+  </div>
+
+  <div
+    class="pong-area"
+    id="pongArea">
+
+    <div
+      class="paddle"
+      id="pongP1">
+    </div>
+
+    <div
+      class="paddle"
+      id="pongP2">
+    </div>
+
+    <div
+      class="ball"
+      id="pongBall">
+    </div>
+
+  </div>
+
+  <div class="action-controls">
+
+    <button onclick="pongStart()">
+      🔄 START
+    </button>
+
+  </div>
+
+  <div class="mobile-controls">
+
+    <button class="empty"></button>
+
+    <button onclick="pongUp()">
+      ▲
+    </button>
+
+    <button class="empty"></button>
+
+    <button class="empty"></button>
+
+    <button class="empty">
+      🏓
+    </button>
+
+    <button class="empty"></button>
+
+    <button class="empty"></button>
+
+    <button onclick="pongDown()">
+      ▼
+    </button>
+
+    <button class="empty"></button>
+
+  </div>
+
+  <div class="info">
+    Paddle kiri dikontrol lu. Paddle kanan dikontrol AI.
+    Pertama mencapai 5 poin menang.
+  </div>
+
+</section>
+
+<!-- =========================
+     TETRIS
+========================= -->
+
+<section class="panel" id="game-tetris">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🧱 Tetris</h2>
+
+    <span
+      class="score"
+      id="tetScore">
+      0
+    </span>
+
+  </div>
+
+  <canvas
+    id="tetCanvas"
+    width="300"
+    height="600">
+  </canvas>
+
+  <div class="action-controls">
+
+    <button onclick="tetStart()">
+      🔄 START
+    </button>
+
+  </div>
+
+  <div class="mobile-controls">
+
+    <button class="empty"></button>
+
+    <button onclick="tetRotate()">
+      ↻
+    </button>
+
+    <button class="empty"></button>
+
+    <button onclick="tetMove(-1)">
+      ◀
+    </button>
+
+    <button onclick="tetDrop()">
+      ⬇
+    </button>
+
+    <button onclick="tetMove(1)">
+      ▶
+    </button>
+
+    <button class="empty"></button>
+    <button class="empty"></button>
+    <button class="empty"></button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     MINESWEEPER
+========================= -->
+
+<section class="panel" id="game-mine">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>💣 Minesweeper</h2>
+
+    <span
+      class="score"
+      id="mineInfo">
+      4 mines
+    </span>
+
+  </div>
+
+  <div
+    class="grid"
+    id="mineGrid">
+  </div>
+
+  <div class="controls">
+
+    <button onclick="mineStart()">
+      🔄 NEW BOARD
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     MEMORY
+========================= -->
+
+<section class="panel" id="game-memory">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🃏 Memory Card</h2>
+
+    <span
+      class="score"
+      id="memScore">
+      0
+    </span>
+
+  </div>
+
+  <div
+    class="memory"
+    id="memoryGrid">
+  </div>
+
+  <div class="controls">
+
+    <button onclick="memoryStart()">
+      🔄 NEW GAME
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     AIM
+========================= -->
+
+<section class="panel" id="game-aim">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🎯 Aim Trainer</h2>
+
+    <span
+      class="score"
+      id="aimScore">
+      0
+    </span>
+
+  </div>
+
+  <div
+    class="aim-area"
+    id="aimArea">
+
+    <div
+      id="aimTarget"
+      class="target">
+    </div>
+
+  </div>
+
+  <div class="controls">
+
+    <button onclick="aimStart()">
+      🎯 START 30 DETIK
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     RUNNER
+========================= -->
+
+<section class="panel" id="game-runner">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🏃 Endless Runner</h2>
+
+    <span
+      class="score"
+      id="runScore">
+      0
+    </span>
+
+  </div>
+
+  <div
+    class="runner-area"
+    id="runnerArea">
+
+    <div
+      class="player"
+      id="runnerPlayer">
+    </div>
+
+    <div class="ground"></div>
+
+  </div>
+
+  <div class="controls">
+
+    <button onclick="runnerStart()">
+      🔄 START
+    </button>
+
+    <button onclick="runnerJump()">
+      🦘 JUMP
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     SPACE SHOOTER
+========================= -->
+
+<section class="panel" id="game-space">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🚀 Space Shooter</h2>
+
+    <span
+      class="score"
+      id="spaceScore">
+      0
+    </span>
+
+  </div>
+
+  <div
+    class="space-area"
+    id="spaceArea">
+
+    <div
+      class="ship"
+      id="ship">
+    </div>
+
+  </div>
+
+  <div class="controls">
+
+    <button onclick="spaceStart()">
+      🔄 START
+    </button>
+
+  </div>
+
+  <div class="mobile-controls">
+
+    <button class="empty"></button>
+    <button class="empty"></button>
+    <button class="empty"></button>
+
+    <button onclick="spaceMove(-1)">
+      ◀
+    </button>
+
+    <button onclick="spaceShoot()">
+      🔫
+    </button>
+
+    <button onclick="spaceMove(1)">
+      ▶
+    </button>
+
+    <button class="empty"></button>
+    <button class="empty"></button>
+    <button class="empty"></button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     RACING
+========================= -->
+
+<section class="panel" id="game-race">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🚗 Blue Moon Racing</h2>
+
+    <span
+      class="score"
+      id="raceScore">
+      0
+    </span>
+
+  </div>
+
+  <div
+    class="race-area"
+    id="raceArea">
+
+    <div class="road"></div>
+
+    <div
+      class="car"
+      id="playerCar">
+    </div>
+
+  </div>
+
+  <div class="controls">
+
+    <button onclick="raceStart()">
+      🔄 START
+    </button>
+
+  </div>
+
+  <div class="mobile-controls">
+
+    <button class="empty"></button>
+    <button class="empty"></button>
+    <button class="empty"></button>
+
+    <button onclick="raceMove(-1)">
+      ◀
+    </button>
+
+    <button class="empty">
+      🚗
+    </button>
+
+    <button onclick="raceMove(1)">
+      ▶
+    </button>
+
+    <button class="empty"></button>
+    <button class="empty"></button>
+    <button class="empty"></button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     KATANA
+========================= -->
+
+<section class="panel" id="game-katana">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>⚔️ Katana Samurai</h2>
+
+    <span
+      class="score"
+      id="katScore">
+      0
+    </span>
+
+  </div>
+
+  <div class="katana-area">
+
+    <div class="dummy"></div>
+
+    <div
+      class="slash"
+      id="slash">
+    </div>
+
+  </div>
+
+  <div class="controls">
+
+    <button onclick="katanaStart()">
+      🔄 START
+    </button>
+
+    <button onclick="slashAttack()">
+      ⚔️ SLASH
+    </button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     RPG
+========================= -->
+
+<section class="panel" id="game-rpg">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🧙 Mini Dungeon RPG</h2>
+
+    <span
+      class="score"
+      id="rpgScore">
+      HP 100
+    </span>
+
+  </div>
+
+  <div class="rpg">
+
+    <div
+      class="rpgmap"
+      id="rpgMap">
+
+      <div
+        class="hero"
+        id="hero">
+      </div>
+
+    </div>
+
+    <div
+      class="side"
+      id="rpgLog">
+
+      Gunakan tombol arah/WASD.
+      Dekati musuh untuk menyerang.
+
+    </div>
+
+  </div>
+
+  <div class="controls">
+
+    <button onclick="rpgStart()">
+      🔄 NEW DUNGEON
+    </button>
+
+  </div>
+
+  <div class="mobile-controls">
+
+    <button class="empty"></button>
+
+    <button onclick="rpgMove(0,-1)">
+      ▲
+    </button>
+
+    <button class="empty"></button>
+
+    <button onclick="rpgMove(-1,0)">
+      ◀
+    </button>
+
+    <button class="empty">
+      ⚔️
+    </button>
+
+    <button onclick="rpgMove(1,0)">
+      ▶
+    </button>
+
+    <button class="empty"></button>
+
+    <button onclick="rpgMove(0,1)">
+      ▼
+    </button>
+
+    <button class="empty"></button>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     TOWER DEFENSE
+========================= -->
+
+<section class="panel" id="game-td">
+
+  <div class="gamehead">
+
+    <button
+      class="back-menu"
+      onclick="backToMenu()">
+      ← MENU
+    </button>
+
+    <h2>🏰 Mini Tower Defense</h2>
+
+    <span
+      class="score"
+      id="tdScore">
+      Gold 100
+    </span>
+
+  </div>
+
+  <div
+    class="td"
+    id="tdMap">
+
+    <div
+      class="tower towerbase"
+      onclick="tdTower()">
+      ✦
+    </div>
+
+  </div>
+
+  <div class="controls">
+
+    <button onclick="tdStart()">
+      ▶ START WAVE
+    </button>
+
+    <button onclick="tdTower()">
+      🏰 BUILD TOWER
+    </button>
+
+  </div>
+
+</section>
+
+</div>
+
+<script>
+
+/* =========================================================
+   GAME MENU
+========================================================= */
+
+const games=[
+  ["game-snake","🐍","Snake","Classic snake"],
+  ["game-pong","🏓","Pong","Beat the AI"],
+  ["game-tetris","🧱","Tetris","Stack the blocks"],
+  ["game-mine","💣","Minesweeper","Avoid the mines"],
+  ["game-memory","🃏","Memory","Find every pair"],
+  ["game-aim","🎯","Aim Trainer","30 second challenge"],
+  ["game-runner","🏃","Runner","Jump and survive"],
+  ["game-space","🚀","Space Shooter","Destroy enemies"],
+  ["game-race","🚗","Racing","Dodge traffic"],
+  ["game-katana","⚔️","Katana","Slash the targets"],
+  ["game-rpg","🧙","Mini RPG","Clear the dungeon"],
+  ["game-td","🏰","Tower Defense","Protect the base"]
+];
+
+const gameList=
+  document.getElementById("gameList");
+
+const gameMenu=
+  document.getElementById("gameMenu");
+
+games.forEach(g=>{
+
+  const b=
+    document.createElement("button");
+
+  b.className="game-card";
+
+  b.innerHTML=`
+    <span class="game-icon">${g[1]}</span>
+    <span class="game-name">${g[2]}</span>
+    <div class="game-desc">${g[3]}</div>
+  `;
+
+  b.onclick=()=>{
+    openGame(g[0]);
+  };
+
+  gameList.appendChild(b);
+
+});
+
+
+function openGame(id){
+
+  closeGameOver();
+
+  stopAllGames();
+
+  gameMenu.classList.add("hidden");
+
+  document
+    .querySelectorAll(".panel")
+    .forEach(x=>{
+      x.classList.remove("active");
+    });
+
+  const panel=
+    document.getElementById(id);
+
+  if(panel){
+    panel.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function backToMenu(){
+
+  closeGameOver();
+
+  stopAllGames();
+
+  document
+    .querySelectorAll(".panel")
+    .forEach(x=>{
+      x.classList.remove("active");
+    });
+
+  gameMenu.classList.remove("hidden");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   STOP ALL GAMES
+========================================================= */
+
+function stopAllGames(){
+
+  /* SNAKE */
+
+  clearInterval(spTimer);
+
+
+  /* PONG */
+
+  pongRun=false;
+
+  if(pongFrame!==null){
+    cancelAnimationFrame(pongFrame);
+  }
+
+
+  /* AIM */
+
+  clearInterval(aimTimer);
+
+  aimActive=false;
+
+
+  /* RUNNER */
+
+  runRunning=false;
+
+  clearInterval(runTimer);
+
+
+  /* SPACE */
+
+  spaceRunning=false;
+
+  if(spaceRAF!==null){
+    cancelAnimationFrame(spaceRAF);
+  }
+
+  spaceEnemies.forEach(e=>{
+    if(e.el)e.el.remove();
+  });
+
+  spaceBullets.forEach(b=>{
+    if(b.el)b.el.remove();
+  });
+
+  spaceEnemies.length=0;
+  spaceBullets.length=0;
+
+
+  /* RACING */
+
+  raceRunning=false;
+
+  clearInterval(raceTimer);
+
+
+  /* RPG */
+
+  rpgRunning=false;
+
+
+  /* TOWER DEFENSE */
+
+  tdRunning=false;
+
+  clearInterval(tdTimer);
+
+
+  /* TETRIS */
+
+  tetRun=false;
+
+  clearInterval(tetInt);
+
+}
+
+
+/* =========================================================
+   GLOBAL GAME OVER SYSTEM
+========================================================= */
+
+let currentRestartFunction=null;
+
+function showGameOver(
+  game,
+  score,
+  restartFunction,
+  win=false,
+  message=""
+){
+
+  const popup=
+    document.getElementById(
+      "gameOverPopup"
+    );
+
+  const icon=
+    document.getElementById(
+      "gameOverIcon"
+    );
+
+  const title=
+    document.getElementById(
+      "gameOverTitle"
+    );
+
+  const gameName=
+    document.getElementById(
+      "gameOverGame"
+    );
+
+  const scoreBox=
+    document.getElementById(
+      "gameOverScore"
+    );
+
+  const restart=
+    document.getElementById(
+      "gameOverRestart"
+    );
+
+
+  gameName.textContent=game;
+
+  scoreBox.textContent=
+    message ||
+    ("SCORE: "+score);
+
+
+  if(win){
+
+    icon.textContent="🏆";
+
+    title.textContent="YOU WIN!";
+
+    title.classList.add("win");
+
+  }else{
+
+    icon.textContent="💀";
+
+    title.textContent="GAME OVER";
+
+    title.classList.remove("win");
+
+  }
+
+
+  currentRestartFunction=
+    restartFunction;
+
+
+  restart.onclick=()=>{
+
+    closeGameOver();
+
+    if(
+      typeof currentRestartFunction==="function"
+    ){
+
+      currentRestartFunction();
+
+    }
+
+  };
+
+
+  popup.classList.add("show");
+
+}
+
+
+function closeGameOver(){
+
+  document
+    .getElementById("gameOverPopup")
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   SNAKE
+========================================================= */
+
+const sc=
+  document.getElementById(
+    "snakeCanvas"
+  );
+
+const sx=
+  sc.getContext("2d");
+
+let snake=[];
+
+let food={};
+
+let sdx=1;
+let sdy=0;
+
+let spTimer=null;
+
+
+function snakeStart(){
+
+  clearInterval(spTimer);
+
+  snake=[
+    {x:10,y:10},
+    {x:9,y:10},
+    {x:8,y:10}
+  ];
+
+  sdx=1;
+  sdy=0;
+
+  snakeFood();
+
+  document.getElementById(
+    "snakeScore"
+  ).textContent=0;
+
+  snakeDraw();
+
+  spTimer=
+    setInterval(
+      snakeTick,
+      100
+    );
+
+}
+
+
+function snakeFood(){
+
+  do{
+
+    food={
+      x:Math.floor(
+        Math.random()*20
+      ),
+
+      y:Math.floor(
+        Math.random()*20
+      )
+    };
+
+  }while(
+    snake.some(
+      p=>
+        p.x===food.x &&
+        p.y===food.y
+    )
+  );
+
+}
+
+
+function snakeDir(x,y){
+
+  if(
+    x===-sdx &&
+    y===-sdy
+  ){
+
+    return;
+
+  }
+
+  sdx=x;
+  sdy=y;
+
+}
+
+
+function snakeTick(){
+
+  const h={
+    x:snake[0].x+sdx,
+    y:snake[0].y+sdy
+  };
+
+  const hitWall=
+    h.x<0 ||
+    h.x>=20 ||
+    h.y<0 ||
+    h.y>=20;
+
+  const hitBody=
+    snake.some(
+      p=>
+        p.x===h.x &&
+        p.y===h.y
+    );
+
+
+  if(hitWall||hitBody){
+
+    clearInterval(spTimer);
+
+    showGameOver(
+      "🐍 SNAKE",
+      snake.length-3,
+      snakeStart
+    );
+
+    return;
+
+  }
+
+
+  snake.unshift(h);
+
+
+  if(
+    h.x===food.x &&
+    h.y===food.y
+  ){
+
+    document.getElementById(
+      "snakeScore"
+    ).textContent=
+      snake.length-3;
+
+    snakeFood();
+
+  }else{
+
+    snake.pop();
+
+  }
+
+
+  snakeDraw();
+
+}
+
+
+function snakeDraw(){
+
+  sx.clearRect(
+    0,
+    0,
+    500,
+    500
+  );
+
+  sx.fillStyle="#02060d";
+
+  sx.fillRect(
+    0,
+    0,
+    500,
+    500
+  );
+
+
+  sx.fillStyle="#fb7185";
+
+  sx.fillRect(
+    food.x*25,
+    food.y*25,
+    23,
+    23
+  );
+
+
+  sx.fillStyle="#38bdf8";
+
+  snake.forEach((p,i)=>{
+
+    sx.fillStyle=
+      i===0
+      ? "#67e8f9"
+      : "#38bdf8";
+
+    sx.fillRect(
+      p.x*25,
+      p.y*25,
+      23,
+      23
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   PONG — RESPONSIVE / LOW END
+========================================================= */
+
+let pongRun=false;
+
+let py=150;
+
+let pongBall={
+  x:350,
+  y:180,
+  vx:-4,
+  vy:3
+};
+
+let ps=[0,0];
+
+let pongFrame=null;
+
+
+function pongStart(){
+
+  const area=
+    document.getElementById(
+      "pongArea"
+    );
+
+  const w=area.clientWidth;
+  const h=area.clientHeight;
+
+  pongRun=true;
+
+  ps=[0,0];
+
+  py=Math.max(
+    0,
+    h/2-40
+  );
+
+  pongBall={
+    x:w/2,
+    y:h/2,
+    vx:-4,
+    vy:3
+  };
+
+  document.getElementById(
+    "pongScore"
+  ).textContent="0 : 0";
+
+  cancelAnimationFrame(
+    pongFrame
+  );
+
+  pongLoop();
+
+}
+
+
+function pongUp(){
+
+  if(!pongRun)return;
+
+  py=Math.max(
+    0,
+    py-28
+  );
+
+}
+
+
+function pongDown(){
+
+  if(!pongRun)return;
+
+  const area=
+    document.getElementById(
+      "pongArea"
+    );
+
+  py=Math.min(
+    Math.max(
+      0,
+      area.clientHeight-80
+    ),
+    py+28
+  );
+
+}
+
+
+function pongReset(dir){
+
+  const area=
+    document.getElementById(
+      "pongArea"
+    );
+
+  pongBall={
+    x:area.clientWidth/2,
+    y:area.clientHeight/2,
+    vx:4*dir,
+    vy:
+      Math.random()>0.5
+      ? 3
+      : -3
+  };
+
+}
+
+
+function pongLoop(){
+
+  if(!pongRun)return;
+
+  const area=
+    document.getElementById(
+      "pongArea"
+    );
+
+  const w=
+    area.clientWidth;
+
+  const h=
+    area.clientHeight;
+
+  const paddleH=80;
+  const paddleW=12;
+
+  const playerX=12;
+
+  const aiX=
+    w-24;
+
+
+  let aiY=
+    pongBall.y-
+    paddleH/2;
+
+  aiY=
+    Math.max(
+      0,
+      Math.min(
+        h-paddleH,
+        aiY
+      )
+    );
+
+
+  pongBall.x+=pongBall.vx;
+  pongBall.y+=pongBall.vy;
+
+
+  if(
+    pongBall.y<=0
+  ){
+
+    pongBall.y=0;
+
+    pongBall.vy=
+      Math.abs(
+        pongBall.vy
+      );
+
+  }
+
+
+  if(
+    pongBall.y>=h-16
+  ){
+
+    pongBall.y=h-16;
+
+    pongBall.vy=
+      -Math.abs(
+        pongBall.vy
+      );
+
+  }
+
+
+  const playerHit=
+    pongBall.x<=playerX+paddleW &&
+    pongBall.x+16>=playerX &&
+    pongBall.y+16>=py &&
+    pongBall.y<=py+paddleH &&
+    pongBall.vx<0;
+
+
+  if(playerHit){
+
+    pongBall.x=
+      playerX+paddleW;
+
+    pongBall.vx=
+      Math.abs(
+        pongBall.vx
+      )+0.15;
+
+    const hitPos=
+      (
+        pongBall.y+8-
+        (
+          py+
+          paddleH/2
+        )
+      )/
+      (
+        paddleH/2
+      );
+
+    pongBall.vy=
+      hitPos*5;
+
+  }
+
+
+  const aiHit=
+    pongBall.x+16>=aiX &&
+    pongBall.x<=aiX+paddleW &&
+    pongBall.y+16>=aiY &&
+    pongBall.y<=aiY+paddleH &&
+    pongBall.vx>0;
+
+
+  if(aiHit){
+
+    pongBall.x=
+      aiX-16;
+
+    pongBall.vx=
+      -Math.abs(
+        pongBall.vx
+      )-0.15;
+
+    const hitPos=
+      (
+        pongBall.y+8-
+        (
+          aiY+
+          paddleH/2
+        )
+      )/
+      (
+        paddleH/2
+      );
+
+    pongBall.vy=
+      hitPos*5;
+
+  }
+
+
+  if(
+    pongBall.x+16<0
+  ){
+
+    ps[1]++;
+
+    pongReset(1);
+
+  }
+
+
+  if(
+    pongBall.x>w
+  ){
+
+    ps[0]++;
+
+    pongReset(-1);
+
+  }
+
+
+  const p1=
+    document.getElementById(
+      "pongP1"
+    );
+
+  p1.style.left=
+    playerX+"px";
+
+  p1.style.top=
+    py+"px";
+
+
+  const p2=
+    document.getElementById(
+      "pongP2"
+    );
+
+  p2.style.left=
+    aiX+"px";
+
+  p2.style.right="auto";
+
+  p2.style.top=
+    aiY+"px";
+
+
+  const ball=
+    document.getElementById(
+      "pongBall"
+    );
+
+  ball.style.left=
+    pongBall.x+"px";
+
+  ball.style.top=
+    pongBall.y+"px";
+
+
+  document.getElementById(
+    "pongScore"
+  ).textContent=
+    ps.join(" : ");
+
+
+  if(ps[0]>=5){
+
+    pongRun=false;
+
+    showGameOver(
+      "🏓 PONG",
+      ps[0]+" : "+ps[1],
+      pongStart,
+      true,
+      "YOU WIN — "+
+      ps[0]+" : "+ps[1]
+    );
+
+    return;
+
+  }
+
+
+  if(ps[1]>=5){
+
+    pongRun=false;
+
+    showGameOver(
+      "🏓 PONG",
+      ps[0]+" : "+ps[1],
+      pongStart,
+      false,
+      "FINAL — "+
+      ps[0]+" : "+ps[1]
+    );
+
+    return;
+
+  }
+
+
+  pongFrame=
+    requestAnimationFrame(
+      pongLoop
+    );
+
+}
+
+
+/* =========================================================
+   MEMORY
+========================================================= */
+
+const icons=[
+  "🌙","⚔️","🍎","💎",
+  "🐔","🎮","🚗","⭐"
+];
+
+let memA=null;
+let memLock=false;
+let memPts=0;
+let memPairs=0;
+
+
+function memoryStart(){
+
+  const a=[
+    ...icons,
+    ...icons
+  ].sort(
+    ()=>Math.random()-.5
+  );
+
+  const g=
+    document.getElementById(
+      "memoryGrid"
+    );
+
+  g.innerHTML="";
+
+  memA=null;
+  memLock=false;
+  memPts=0;
+  memPairs=0;
+
+  document.getElementById(
+    "memScore"
+  ).textContent=0;
+
+
+  a.forEach(v=>{
+
+    const c=
+      document.createElement(
+        "div"
+      );
+
+    c.className="card";
+
+    c.innerHTML=
+      "<div>?</div>";
+
+
+    c.onclick=()=>{
+
+      if(
+        memLock ||
+        c.classList.contains(
+          "open"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      c.classList.add("open");
+
+      c.firstChild.textContent=v;
+
+
+      if(!memA){
+
+        memA={
+          c,
+          v
+        };
+
+        return;
+
+      }
+
+
+      if(memA.v===v){
+
+        memPts++;
+
+        memPairs++;
+
+        document.getElementById(
+          "memScore"
+        ).textContent=
+          memPts;
+
+        memA=null;
+
+
+        if(
+          memPairs===icons.length
+        ){
+
+          setTimeout(()=>{
+
+            showGameOver(
+              "🃏 MEMORY CARD",
+              memPts,
+              memoryStart,
+              true,
+              "SEMUA PASANGAN DITEMUKAN!"
+            );
+
+          },300);
+
+        }
+
+      }else{
+
+        memLock=true;
+
+        const old=memA.c;
+
+        setTimeout(()=>{
+
+          old.classList.remove(
+            "open"
+          );
+
+          old.firstChild.textContent="?";
+
+          c.classList.remove(
+            "open"
+          );
+
+          c.firstChild.textContent="?";
+
+          memA=null;
+
+          memLock=false;
+
+        },500);
+
+      }
+
+    };
+
+
+    g.appendChild(c);
+
+  });
+
+}
+
+
+/* =========================================================
+   MINESWEEPER
+========================================================= */
+
+let mineOver=false;
+let mineOpened=0;
+let mineMines=null;
+
+
+function mineStart(){
+
+  const n=16;
+
+  mineMines=new Set();
+
+  mineOver=false;
+  mineOpened=0;
+
+
+  while(
+    mineMines.size<4
+  ){
+
+    mineMines.add(
+      Math.floor(
+        Math.random()*n
+      )
+    );
+
+  }
+
+
+  const g=
+    document.getElementById(
+      "mineGrid"
+    );
+
+  g.innerHTML="";
+
+
+  document.getElementById(
+    "mineInfo"
+  ).textContent=
+    "4 mines";
+
+
+  for(let i=0;i<n;i++){
+
+    const c=
+      document.createElement(
+        "div"
+      );
+
+    c.className="cell";
+
+
+    c.onclick=()=>{
+
+      if(mineOver)return;
+
+
+      if(
+        mineMines.has(i)
+      ){
+
+        c.classList.add(
+          "open",
+          "mine"
+        );
+
+        c.textContent="💣";
+
+        mineOver=true;
+
+
+        mineMines.forEach(m=>{
+
+          g.children[m]
+            .classList.add("open");
+
+          g.children[m]
+            .textContent="💣";
+
+        });
+
+
+        showGameOver(
+          "💣 MINESWEEPER",
+          mineOpened,
+          mineStart
+        );
+
+        return;
+
+      }
+
+
+      if(
+        c.classList.contains(
+          "open"
+        )
+      ){
+
+        return;
+
+      }
+
+
+      c.classList.add("open");
+
+      c.textContent="·";
+
+      mineOpened++;
+
+
+      if(
+        mineOpened>=12
+      ){
+
+        mineOver=true;
+
+        showGameOver(
+          "💣 MINESWEEPER",
+          mineOpened,
+          mineStart,
+          true,
+          "BOARD CLEAR — SAFE!"
+        );
+
+      }
+
+    };
+
+
+    g.appendChild(c);
+
+  }
+
+}
+
+
+/* =========================================================
+   AIM TRAINER
+========================================================= */
+
+let aimTimer=null;
+let aimActive=false;
+
+
+function aimStart(){
+
+  const t=
+    document.getElementById(
+      "aimTarget"
+    );
+
+  const area=
+    document.getElementById(
+      "aimArea"
+    );
+
+  let s=0;
+
+  const end=
+    Date.now()+30000;
+
+  aimActive=true;
+
+
+  document.getElementById(
+    "aimScore"
+  ).textContent=0;
+
+
+  t.style.display="block";
+
+
+  function place(){
+
+    const maxX=
+      Math.max(
+        0,
+        area.clientWidth-
+        t.offsetWidth
+      );
+
+    const maxY=
+      Math.max(
+        0,
+        area.clientHeight-
+        t.offsetHeight
+      );
+
+
+    t.style.left=
+      Math.random()*maxX+
+      "px";
+
+    t.style.top=
+      Math.random()*maxY+
+      "px";
+
+  }
+
+
+  t.onclick=()=>{
+
+    if(
+      !aimActive ||
+      Date.now()>=end
+    ){
+
+      return;
+
+    }
+
+    s++;
+
+
+    document.getElementById(
+      "aimScore"
+    ).textContent=s;
+
+
+    place();
+
+  };
+
+
+  place();
+
+
+  clearInterval(
+    aimTimer
+  );
+
+
+  aimTimer=
+    setInterval(()=>{
+
+      const left=
+        Math.ceil(
+          (end-Date.now())/1000
+        );
+
+
+      if(left<=0){
+
+        clearInterval(
+          aimTimer
+        );
+
+        aimActive=false;
+
+        t.style.display="none";
+
+
+        showGameOver(
+          "🎯 AIM TRAINER",
+          s,
+          aimStart,
+          true,
+          "WAKTU HABIS — SCORE "+s
+        );
+
+      }
+
+    },100);
+
+}
+
+
+/* =========================================================
+   RUNNER
+========================================================= */
+
+let runY=0;
+let runVel=0;
+let runTimer=null;
+let runScore=0;
+let runRunning=false;
+
+
+function runnerStart(){
+
+  clearInterval(
+    runTimer
+  );
+
+  runRunning=true;
+
+  runY=0;
+  runVel=0;
+  runScore=0;
+
+
+  document.getElementById(
+    "runScore"
+  ).textContent=0;
+
+
+  document
+    .querySelectorAll(
+      ".obstacle"
+    )
+    .forEach(
+      x=>x.remove()
+    );
+
+
+  const r=
+    document.getElementById(
+      "runnerArea"
+    );
+
+  const p=
+    document.getElementById(
+      "runnerPlayer"
+    );
+
+
+  const o=
+    document.createElement(
+      "div"
+    );
+
+  o.className="obstacle";
+
+  o.style.right="-30px";
+
+  r.appendChild(o);
+
+
+  let x=-30;
+
+
+  runTimer=
+    setInterval(()=>{
+
+      if(!runRunning)return;
+
+
+      x+=6;
+
+      o.style.right=
+        x+"px";
+
+
+      runVel-=.8;
+
+      runY+=runVel;
+
+
+      if(runY<0){
+
+        runY=0;
+        runVel=0;
+
+      }
+
+
+      p.style.bottom=
+        (28+runY)+"px";
+
+
+      runScore++;
+
+
+      document.getElementById(
+        "runScore"
+      ).textContent=
+        Math.floor(
+          runScore/10
+        );
+
+
+      const playerLeft=70;
+
+      const obstacleLeft=
+        r.clientWidth-
+        x-
+        30;
+
+
+      const collision=
+        obstacleLeft<
+          playerLeft+30 &&
+        obstacleLeft+25>
+          playerLeft &&
+        runY<45;
+
+
+      if(collision){
+
+        runRunning=false;
+
+        clearInterval(
+          runTimer
+        );
+
+
+        showGameOver(
+          "🏃 ENDLESS RUNNER",
+          Math.floor(
+            runScore/10
+          ),
+          runnerStart
+        );
+
+        return;
+
+      }
+
+
+      if(
+        x>
+        r.clientWidth+40
+      ){
+
+        o.remove();
+
+        clearInterval(
+          runTimer
+        );
+
+        runnerStart();
+
+      }
+
+    },30);
+
+}
+
+
+function runnerJump(){
+
+  if(
+    runRunning &&
+    runY===0
+  ){
+
+    runVel=12;
+
+  }
+
+}
+
+
+/* =========================================================
+   SPACE SHOOTER — LOW END OPTIMIZED
+========================================================= */
+
+let shipX=50;
+
+let spacePts=0;
+
+let spaceRunning=false;
+
+let spaceRAF=null;
+
+let spaceEnemies=[];
+
+let spaceBullets=[];
+
+let spaceSpawnTimer=0;
+
+let spaceLastTime=0;
+
+
+function spaceStart(){
+
+  spaceRunning=true;
+
+  spacePts=0;
+
+  spaceEnemies=[];
+
+  spaceBullets=[];
+
+  spaceSpawnTimer=0;
+
+
+  const area=
+    document.getElementById(
+      "spaceArea"
+    );
+
+
+  area
+    .querySelectorAll(
+      ".enemy,.bullet"
+    )
+    .forEach(
+      x=>x.remove()
+    );
+
+
+  shipX=
+    area.clientWidth/2;
+
+
+  document.getElementById(
+    "spaceScore"
+  ).textContent=0;
+
+
+  const ship=
+    document.getElementById(
+      "ship"
+    );
+
+  ship.style.left=
+    shipX+"px";
+
+
+  spaceLastTime=
+    performance.now();
+
+
+  cancelAnimationFrame(
+    spaceRAF
+  );
+
+
+  spaceRAF=
+    requestAnimationFrame(
+      spaceLoop
+    );
+
+}
+
+
+function spaceLoop(now){
+
+  if(!spaceRunning)return;
+
+
+  if(
+    now-spaceLastTime<33
+  ){
+
+    spaceRAF=
+      requestAnimationFrame(
+        spaceLoop
+      );
+
+    return;
+
+  }
+
+
+  const dt=
+    Math.min(
+      .05,
+      (now-spaceLastTime)/1000
+    );
+
+
+  spaceLastTime=now;
+
+
+  const area=
+    document.getElementById(
+      "spaceArea"
+    );
+
+
+  const width=
+    area.clientWidth;
+
+  const height=
+    area.clientHeight;
+
+
+  /* SPAWN */
+
+  spaceSpawnTimer-=dt;
+
+
+  if(
+    spaceSpawnTimer<=0
+  ){
+
+    spaceSpawnTimer=.65;
+
+
+    if(
+      spaceEnemies.length<12
+    ){
+
+      const e=
+        document.createElement(
+          "div"
+        );
+
+      e.className="enemy";
+
+
+      const obj={
+        el:e,
+        x:
+          Math.random()*
+          Math.max(
+            1,
+            width-24
+          ),
+        y:-30,
+        speed:
+          90+
+          Math.random()*50
+      };
+
+
+      e.style.left=
+        obj.x+"px";
+
+      e.style.top=
+        obj.y+"px";
+
+
+      area.appendChild(e);
+
+      spaceEnemies.push(obj);
+
+    }
+
+  }
+
+
+  /* ENEMIES */
+
+  for(
+    let i=spaceEnemies.length-1;
+    i>=0;
+    i--
+  ){
+
+    const e=
+      spaceEnemies[i];
+
+
+    e.y+=
+      e.speed*dt;
+
+
+    e.el.style.top=
+      e.y+"px";
+
+
+    if(
+      e.y>height
+    ){
+
+      e.el.remove();
+
+      spaceEnemies.splice(
+        i,
+        1
+      );
+
+
+      spaceRunning=false;
+
+      cancelAnimationFrame(
+        spaceRAF
+      );
+
+
+      showGameOver(
+        "🚀 SPACE SHOOTER",
+        spacePts,
+        spaceStart,
+        false,
+        "ENEMY MENEMBUS PERTAHANAN — SCORE "+
+        spacePts
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /* BULLETS */
+
+  for(
+    let i=spaceBullets.length-1;
+    i>=0;
+    i--
+  ){
+
+    const b=
+      spaceBullets[i];
+
+
+    b.y-=
+      430*dt;
+
+
+    b.el.style.top=
+      b.y+"px";
+
+
+    if(
+      b.y<-20
+    ){
+
+      b.el.remove();
+
+      spaceBullets.splice(
+        i,
+        1
+      );
+
+    }
+
+  }
+
+
+  /* BULLET COLLISION */
+
+  for(
+    let bi=spaceBullets.length-1;
+    bi>=0;
+    bi--
+  ){
+
+    const b=
+      spaceBullets[bi];
+
+    let hit=false;
+
+
+    for(
+      let ei=spaceEnemies.length-1;
+      ei>=0;
+      ei--
+    ){
+
+      const e=
+        spaceEnemies[ei];
+
+
+      const hitX=
+        b.x+4>=e.x &&
+        b.x<=e.x+24;
+
+
+      const hitY=
+        b.y<=e.y+24 &&
+        b.y+12>=e.y;
+
+
+      if(
+        hitX &&
+        hitY
+      ){
+
+        e.el.remove();
+
+        b.el.remove();
+
+
+        spaceEnemies.splice(
+          ei,
+          1
+        );
+
+        spaceBullets.splice(
+          bi,
+          1
+        );
+
+
+        spacePts++;
+
+
+        document.getElementById(
+          "spaceScore"
+        ).textContent=
+          spacePts;
+
+
+        hit=true;
+
+        break;
+
+      }
+
+    }
+
+
+    if(hit)continue;
+
+  }
+
+
+  /* SHIP COLLISION */
+
+  const shipY=
+    height-45;
+
+
+  for(
+    let i=spaceEnemies.length-1;
+    i>=0;
+    i--
+  ){
+
+    const e=
+      spaceEnemies[i];
+
+
+    const hitX=
+      e.x+24>=shipX-15 &&
+      e.x<=shipX+15;
+
+
+    const hitY=
+      e.y+24>=shipY &&
+      e.y<=shipY+22;
+
+
+    if(
+      hitX &&
+      hitY
+    ){
+
+      e.el.remove();
+
+      spaceEnemies.splice(
+        i,
+        1
+      );
+
+
+      spaceRunning=false;
+
+      cancelAnimationFrame(
+        spaceRAF
+      );
+
+
+      showGameOver(
+        "🚀 SPACE SHOOTER",
+        spacePts,
+        spaceStart,
+        false,
+        "SHIP HANCUR — SCORE "+
+        spacePts
+      );
+
+
+      return;
+
+    }
+
+  }
+
+
+  spaceRAF=
+    requestAnimationFrame(
+      spaceLoop
+    );
+
+}
+
+
+function spaceMove(d){
+
+  if(!spaceRunning)return;
+
+
+  const area=
+    document.getElementById(
+      "spaceArea"
+    );
+
+
+  const width=
+    area.clientWidth;
+
+
+  shipX+=
+    d*45;
+
+
+  shipX=
+    Math.max(
+      20,
+      Math.min(
+        width-20,
+        shipX
+      )
+    );
+
+
+  document.getElementById(
+    "ship"
+  ).style.left=
+    shipX+"px";
+
+}
+
+
+function spaceShoot(){
+
+  if(!spaceRunning)return;
+
+
+  if(
+    spaceBullets.length>=5
+  ){
+
+    return;
+
+  }
+
+
+  const area=
+    document.getElementById(
+      "spaceArea"
+    );
+
+
+  const height=
+    area.clientHeight;
+
+
+  const b=
+    document.createElement(
+      "div"
+    );
+
+
+  b.className="bullet";
+
+
+  const obj={
+    el:b,
+    x:shipX-2,
+    y:height-58
+  };
+
+
+  b.style.left=
+    obj.x+"px";
+
+  b.style.top=
+    obj.y+"px";
+
+
+  area.appendChild(b);
+
+  spaceBullets.push(obj);
+
+}
+
+
+/* =========================================================
+   RACING
+========================================================= */
+
+let raceX=50;
+let raceTimer=null;
+let racePts=0;
+let raceRunning=false;
+
+
+function raceStart(){
+
+  clearInterval(
+    raceTimer
+  );
+
+  raceRunning=true;
+
+  raceX=50;
+
+  racePts=0;
+
+
+  document.getElementById(
+    "raceScore"
+  ).textContent=0;
+
+
+  document
+    .querySelectorAll(
+      ".enemycar"
+    )
+    .forEach(
+      x=>x.remove()
+    );
+
+
+  const area=
+    document.getElementById(
+      "raceArea"
+    );
+
+
+  document.getElementById(
+    "playerCar"
+  ).style.left=
+    raceX+"%";
+
+
+  raceTimer=
+    setInterval(()=>{
+
+      if(!raceRunning)return;
+
+
+      const e=
+        document.createElement(
+          "div"
+        );
+
+
+      e.className="enemycar";
+
+
+      e.style.left=
+        (
+          25+
+          Math.random()*50
+        )+"%";
+
+
+      e.style.top="-70px";
+
+
+      area.appendChild(e);
+
+
+      let y=-70;
+
+
+      const ti=
+        setInterval(()=>{
+
+          if(!raceRunning){
+
+            clearInterval(ti);
+
+            e.remove();
+
+            return;
+
+          }
+
+
+          y+=5;
+
+          e.style.top=
+            y+"px";
+
+
+          racePts++;
+
+
+          document.getElementById(
+            "raceScore"
+          ).textContent=
+            Math.floor(
+              racePts/10
+            );
+
+
+          const car=
+            document
+              .getElementById(
+                "playerCar"
+              )
+              .getBoundingClientRect();
+
+
+          const enemy=
+            e.getBoundingClientRect();
+
+
+          if(
+            car.left<
+              enemy.right &&
+            car.right>
+              enemy.left &&
+            car.top<
+              enemy.bottom &&
+            car.bottom>
+              enemy.top
+          ){
+
+            raceRunning=false;
+
+            clearInterval(
+              raceTimer
+            );
+
+            clearInterval(ti);
+
+
+            showGameOver(
+              "🚗 BLUE MOON RACING",
+              Math.floor(
+                racePts/10
+              ),
+              raceStart
+            );
+
+
+            return;
+
+          }
+
+
+          if(
+            y>450
+          ){
+
+            e.remove();
+
+            clearInterval(ti);
+
+          }
+
+        },30);
+
+    },850);
+
+}
+
+
+function raceMove(d){
+
+  if(!raceRunning)return;
+
+
+  raceX=
+    Math.max(
+      25,
+      Math.min(
+        75,
+        raceX+d*7
+      )
+    );
+
+
+  document.getElementById(
+    "playerCar"
+  ).style.left=
+    raceX+"%";
+
+}
+
+
+/* =========================================================
+   KATANA
+========================================================= */
+
+let katPts=0;
+
+
+function katanaStart(){
+
+  katPts=0;
+
+
+  document.getElementById(
+    "katScore"
+  ).textContent=0;
+
+}
+
+
+function slashAttack(){
+
+  const s=
+    document.getElementById(
+      "slash"
+    );
+
+
+  s.classList.remove("go");
+
+  void s.offsetWidth;
+
+  s.classList.add("go");
+
+
+  katPts++;
+
+
+  document.getElementById(
+    "katScore"
+  ).textContent=
+    katPts;
+
+
+  if(katPts>=20){
+
+    setTimeout(()=>{
+
+      showGameOver(
+        "⚔️ KATANA SAMURAI",
+        katPts,
+        katanaStart,
+        true,
+        "20 TARGETS SLASHED!"
+      );
+
+    },350);
+
+  }
+
+}
+
+
+/* =========================================================
+   RPG
+========================================================= */
+
+let hx=50;
+let hy=50;
+let hp=100;
+let rpgPts=0;
+let rpgRunning=false;
+
+
+function rpgStart(){
+
+  hx=50;
+  hy=50;
+  hp=100;
+  rpgPts=0;
+  rpgRunning=true;
+
+
+  const m=
+    document.getElementById(
+      "rpgMap"
+    );
+
+
+  m.querySelectorAll(
+    ".enemyunit"
+  ).forEach(
+    x=>x.remove()
+  );
+
+
+  for(let i=0;i<4;i++){
+
+    const e=
+      document.createElement(
+        "div"
+      );
+
+
+    e.className="enemyunit";
+
+
+    e.style.left=
+      (
+        10+
+        Math.random()*80
+      )+"%";
+
+
+    e.style.top=
+      (
+        10+
+        Math.random()*80
+      )+"%";
+
+
+    m.appendChild(e);
+
+  }
+
+
+  document.getElementById(
+    "rpgLog"
+  ).textContent=
+    "Gunakan tombol panah/WASD. Dekati musuh untuk menyerang.";
+
+
+  rpgDraw();
+
+}
+
+
+function rpgMove(dx,dy){
+
+  if(!rpgRunning)return;
+
+
+  hx=
+    Math.max(
+      2,
+      Math.min(
+        90,
+        hx+dx*4
+      )
+    );
+
+
+  hy=
+    Math.max(
+      2,
+      Math.min(
+        90,
+        hy+dy*4
+      )
+    );
+
+
+  document
+    .querySelectorAll(
+      ".enemyunit"
+    )
+    .forEach(e=>{
+
+      const ex=
+        parseFloat(
+          e.style.left
+        );
+
+
+      const ey=
+        parseFloat(
+          e.style.top
+        );
+
+
+      if(
+        Math.abs(
+          ex-hx
+        )<5 &&
+        Math.abs(
+          ey-hy
+        )<5
+      ){
+
+        e.remove();
+
+        hp=
+          Math.max(
+            0,
+            hp-10
+          );
+
+        rpgPts++;
+
+      }
+
+    });
+
+
+  if(hp<=0){
+
+    rpgRunning=false;
+
+
+    showGameOver(
+      "🧙 MINI DUNGEON RPG",
+      rpgPts,
+      rpgStart,
+      false,
+      "HP HABIS — ENEMY DEFEATED: "+
+      rpgPts
+    );
+
+  }
+
+
+  const enemies=
+    document.querySelectorAll(
+      ".enemyunit"
+    ).length;
+
+
+  if(
+    rpgRunning &&
+    enemies===0
+  ){
+
+    rpgRunning=false;
+
+
+    showGameOver(
+      "🧙 MINI DUNGEON RPG",
+      rpgPts,
+      rpgStart,
+      true,
+      "DUNGEON CLEAR — "+
+      rpgPts+
+      " ENEMY!"
+    );
+
+  }
+
+
+  rpgDraw();
+
+}
+
+
+function rpgDraw(){
+
+  const h=
+    document.getElementById(
+      "hero"
+    );
+
+
+  h.style.left=
+    hx+"%";
+
+  h.style.top=
+    hy+"%";
+
+
+  document.getElementById(
+    "rpgScore"
+  ).textContent=
+    "HP "+hp;
+
+}
+
+
+/* =========================================================
+   TOWER DEFENSE
+========================================================= */
+
+let gold=100;
+let tdTimer=null;
+let tdRunning=false;
+let tdLives=5;
+
+
+function tdStart(){
+
+  clearInterval(
+    tdTimer
+  );
+
+
+  tdRunning=true;
+
+  gold=100;
+
+  tdLives=5;
+
+
+  document.getElementById(
+    "tdScore"
+  ).textContent=
+    "Gold 100";
+
+
+  const m=
+    document.getElementById(
+      "tdMap"
+    );
+
+
+  m.querySelectorAll(
+    ".creep"
+  ).forEach(
+    x=>x.remove()
+  );
+
+
+  spawnCreep();
+
+}
+
+
+function spawnCreep(){
+
+  if(!tdRunning)return;
+
+
+  const m=
+    document.getElementById(
+      "tdMap"
+    );
+
+
+  const c=
+    document.createElement(
+      "div"
+    );
+
+
+  c.className="creep";
+
+
+  c.style.left="-30px";
+
+  c.style.top=
+    (
+      80+
+      Math.random()*220
+    )+"px";
+
+
+  m.appendChild(c);
+
+
+  let x=-30;
+
+
+  tdTimer=
+    setInterval(()=>{
+
+      if(!tdRunning){
+
+        clearInterval(tdTimer);
+
+        c.remove();
+
+        return;
+
+      }
+
+
+      x+=3;
+
+
+      c.style.left=
+        x+"px";
+
+
+      if(
+        x>m.clientWidth
+      ){
+
+        c.remove();
+
+        clearInterval(
+          tdTimer
+        );
+
+
+        tdLives--;
+
+
+        if(
+          tdLives<=0
+        ){
+
+          tdRunning=false;
+
+
+          showGameOver(
+            "🏰 TOWER DEFENSE",
+            gold,
+            tdStart,
+            false,
+            "BASE HANCUR — GOLD "+
+            gold
+          );
+
+
+          return;
+
+        }
+
+
+        spawnCreep();
+
+      }
+
+    },30);
+
+}
+
+
+function tdTower(){
+
+  if(
+    !tdRunning &&
+    gold===100
+  ){
+
+    tdStart();
+
+  }
+
+
+  if(gold<20)return;
+
+
+  gold-=20;
+
+
+  document.getElementById(
+    "tdScore"
+  ).textContent=
+    "Gold "+gold;
+
+
+  const t=
+    document.createElement(
+      "div"
+    );
+
+
+  t.className="tower";
+
+  t.textContent="✦";
+
+
+  t.style.left=
+    (
+      80+
+      Math.random()*560
+    )+"px";
+
+
+  t.style.top=
+    (
+      80+
+      Math.random()*230
+    )+"px";
+
+
+  document.getElementById(
+    "tdMap"
+  ).appendChild(t);
+
+}
+
+
+/* =========================================================
+   TETRIS
+========================================================= */
+
+const tc=
+  document.getElementById(
+    "tetCanvas"
+  );
+
+const tx=
+  tc.getContext("2d");
+
+const cols=10;
+const rows=20;
+const sz=30;
+
+let board=[];
+let block=null;
+let tetRun=false;
+let tetInt=null;
+let tetPts=0;
+
+
+const shapes=[
+
+  [[1,1,1,1]],
+
+  [
+    [1,1],
+    [1,1]
+  ],
+
+  [
+    [0,1,0],
+    [1,1,1]
+  ],
+
+  [
+    [1,0,0],
+    [1,1,1]
+  ],
+
+  [
+    [0,0,1],
+    [1,1,1]
+  ],
+
+  [
+    [1,1,0],
+    [0,1,1]
+  ]
+
+];
+
+
+function tetStart(){
+
+  board=
+    Array.from(
+      {length:rows},
+      ()=>Array(cols).fill(0)
+    );
+
+
+  tetPts=0;
+
+
+  document.getElementById(
+    "tetScore"
+  ).textContent=0;
+
+
+  tetRun=true;
+
+
+  newBlock();
+
+
+  clearInterval(
+    tetInt
+  );
+
+
+  tetInt=
+    setInterval(
+      tetStep,
+      500
+    );
+
+
+  tetDraw();
+
+}
+
+
+function newBlock(){
+
+  const s=
+    shapes[
+      Math.floor(
+        Math.random()*
+        shapes.length
+      )
+    ];
+
+
+  block={
+    s:s.map(
+      r=>[...r]
+    ),
+    x:3,
+    y:0
+  };
+
+}
+
+
+function collide(
+  nx=block.x,
+  ny=block.y,
+  sh=block.s
+){
+
+  return sh.some(
+    (r,y)=>
+      r.some(
+        (v,x)=>{
+
+          if(!v)return false;
+
+
+          const bx=
+            nx+x;
+
+          const by=
+            ny+y;
+
+
+          if(
+            bx<0 ||
+            bx>=cols ||
+            by>=rows
+          ){
+
+            return true;
+
+          }
+
+
+          if(
+            by>=0 &&
+            board[by][bx]
+          ){
+
+            return true;
+
+          }
+
+
+          return false;
+
+        }
+      )
+  );
+
+}
+
+
+function tetStep(){
+
+  if(!tetRun)return;
+
+
+  if(
+    !collide(
+      block.x,
+      block.y+1
+    )
+  ){
+
+    block.y++;
+
+  }else{
+
+    block.s.forEach(
+      (r,y)=>
+        r.forEach(
+          (v,x)=>{
+
+            if(v){
+
+              if(
+                block.y+y>=0
+              ){
+
+                board[
+                  block.y+y
+                ][
+                  block.x+x
+                ]=1;
+
+              }
+
+            }
+
+          }
+        )
+    );
+
+
+    board=
+      board.filter(
+        r=>r.some(
+          v=>!v
+        )
+      );
+
+
+    while(
+      board.length<rows
+    ){
+
+      board.unshift(
+        Array(cols).fill(0)
+      );
+
+    }
+
+
+    tetPts++;
+
+
+    document.getElementById(
+      "tetScore"
+    ).textContent=
+      tetPts;
+
+
+    newBlock();
+
+
+    if(
+      collide()
+    ){
+
+      tetRun=false;
+
+      clearInterval(
+        tetInt
+      );
+
+
+      showGameOver(
+        "🧱 TETRIS",
+        tetPts,
+        tetStart
+      );
+
+    }
+
+  }
+
+
+  tetDraw();
+
+}
+
+
+function tetMove(d){
+
+  if(
+    tetRun &&
+    !collide(
+      block.x+d,
+      block.y
+    )
+  ){
+
+    block.x+=d;
+
+  }
+
+
+  tetDraw();
+
+}
+
+
+function tetRotate(){
+
+  if(!tetRun)return;
+
+
+  const r=
+    block.s[0].map(
+      (_,i)=>
+        block.s.map(
+          row=>row[i]
+        ).reverse()
+    );
+
+
+  if(
+    !collide(
+      block.x,
+      block.y,
+      r
+    )
+  ){
+
+    block.s=r;
+
+  }
+
+
+  tetDraw();
+
+}
+
+
+function tetDrop(){
+
+  if(!tetRun)return;
+
+
+  while(
+    !collide(
+      block.x,
+      block.y+1
+    )
+  ){
+
+    block.y++;
+
+  }
+
+
+  tetStep();
+
+}
+
+
+function tetDraw(){
+
+  tx.fillStyle="#02060d";
+
+  tx.fillRect(
+    0,
+    0,
+    300,
+    600
+  );
+
+
+  tx.strokeStyle="#0d2639";
+
+
+  for(
+    let x=0;
+    x<=cols;
+    x++
+  ){
+
+    tx.beginPath();
+
+    tx.moveTo(
+      x*sz,
+      0
+    );
+
+    tx.lineTo(
+      x*sz,
+      600
+    );
+
+    tx.stroke();
+
+  }
+
+
+  for(
+    let y=0;
+    y<=rows;
+    y++
+  ){
+
+    tx.beginPath();
+
+    tx.moveTo(
+      0,
+      y*sz
+    );
+
+    tx.lineTo(
+      300,
+      y*sz
+    );
+
+    tx.stroke();
+
+  }
+
+
+  tx.fillStyle="#38bdf8";
+
+
+  board.forEach(
+    (r,y)=>
+      r.forEach(
+        (v,x)=>{
+
+          if(v){
+
+            tx.fillRect(
+              x*sz+2,
+              y*sz+2,
+              26,
+              26
+            );
+
+          }
+
+        }
+      )
+  );
+
+
+  if(!block)return;
+
+
+  block.s.forEach(
+    (r,y)=>
+      r.forEach(
+        (v,x)=>{
+
+          if(v){
+
+            tx.fillRect(
+              (block.x+x)*sz+2,
+              (block.y+y)*sz+2,
+              26,
+              26
+            );
+
+          }
+
+        }
+      )
+  );
+
+}
+
+
+/* =========================================================
+   KEYBOARD CONTROLS
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    /* SNAKE */
+
+    const snakeKeys={
+      ArrowUp:[0,-1],
+      ArrowDown:[0,1],
+      ArrowLeft:[-1,0],
+      ArrowRight:[1,0]
+    };
+
+
+    if(
+      snakeKeys[e.key]
+    ){
+
+      snakeDir(
+        ...snakeKeys[e.key]
+      );
+
+    }
+
+
+    /* SPACE / RUNNER */
+
+    if(
+      e.code==="Space"
+    ){
+
+      e.preventDefault();
+
+      runnerJump();
+
+    }
+
+
+    /* RACE */
+
+    if(
+      e.key==="ArrowLeft"
+    ){
+
+      raceMove(-1);
+
+    }
+
+
+    if(
+      e.key==="ArrowRight"
+    ){
+
+      raceMove(1);
+
+    }
+
+
+    /* PONG */
+
+    if(
+      e.key==="ArrowUp"
+    ){
+
+      pongUp();
+
+    }
+
+
+    if(
+      e.key==="ArrowDown"
+    ){
+
+      pongDown();
+
+    }
+
+
+    /* TETRIS */
+
+    if(
+      e.key==="a" ||
+      e.key==="A"
+    ){
+
+      tetMove(-1);
+
+    }
+
+
+    if(
+      e.key==="d" ||
+      e.key==="D"
+    ){
+
+      tetMove(1);
+
+    }
+
+
+    if(
+      e.key==="w" ||
+      e.key==="W"
+    ){
+
+      tetRotate();
+
+    }
+
+
+    if(
+      e.key==="s" ||
+      e.key==="S"
+    ){
+
+      tetDrop();
+
+    }
+
+
+    /* RPG */
+
+    const k=
+      e.key.toLowerCase();
+
+
+    if(
+      k==="w"
+    ){
+
+      rpgMove(0,-1);
+
+    }
+
+
+    if(
+      k==="s"
+    ){
+
+      rpgMove(0,1);
+
+    }
+
+
+    if(
+      k==="a"
+    ){
+
+      rpgMove(-1,0);
+
+    }
+
+
+    if(
+      k==="d"
+    ){
+
+      rpgMove(1,0);
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZE LIGHTWEIGHT GAMES
+========================================================= */
+
+memoryStart();
+mineStart();
+
+</script>
+
+</body>
+</html>
