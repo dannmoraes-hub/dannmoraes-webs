@@ -361,13 +361,13 @@ function connectServer() {
     setConnection("Connecting...", SERVER_URL, "#f59e0b");
 
     socket = io(SERVER_URL, {
-        transports: ["websocket", "polling"],
-        reconnection: true,
-        reconnectionAttempts: Infinity,
-        reconnectionDelay: 2000,
-        timeout: 10000
-    });
-
+    transports: ["polling"],
+    upgrade: false,
+    reconnection: true,
+    reconnectionAttempts: Infinity,
+    reconnectionDelay: 2000,
+    timeout: 20000
+});
     socket.on("connect", () => {
         serverConnected = true;
         setConnection(
